@@ -1,0 +1,41 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+
+    box-sizing: inherit;
+}
+
+:root {
+    --clr-primary: white;
+    --clr-secondary: black;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+a {
+    color: dodgerblue;
+    text-decoration: none;
+
+    font-style: italic;
+}
+
+main {
+    display: flex;
+    flex-grow: 1;
+}
+
+#header-holder {
+    height: 4rem;
+}
+
+/* utility classes */
+
+.hidden, .hidden > * {
+    display: none !important;
+}
+

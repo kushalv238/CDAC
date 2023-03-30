@@ -1,0 +1,44 @@
+#home {
+    background-color: blue;
+
+    display: flex;
+    width: 100%;
+}
+
+#side-panel {
+    width: 25%;
+    background-color: pink;
+}
+
+#graph-area {
+    width: 100%;
+    background-color: cyan;
+}
+
+@media only screen and (max-width: 1200px) {
+    #side-panel {
+        width: 40%;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    #side-panel {
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    #home {
+        flex-wrap: wrap;
+    }
+
+    #side-panel {
+        position: fixed;
+        bottom: 0;
+        
+        width: 100%;
+        height: 20rem;
+        
+        order: 2;
+    }
+}
