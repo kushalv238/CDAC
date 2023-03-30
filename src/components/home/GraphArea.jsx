@@ -14,6 +14,14 @@ class GraphArea extends React.Component {
         return zi;
       })
     );
+    
+    // evaluate the function z = -7x + 3y for each x and y value
+    var z2 = x.map((xi) =>
+      y.map((yi) => {
+        const zi = -7*xi + 3*yi;
+        return zi;
+      })
+    );
 
     // create a surface plot of the function
     var trace1 = {
@@ -21,23 +29,15 @@ class GraphArea extends React.Component {
       x: x,
       y: y,
       z: z,
-      colorscale: 'Virdis',
+      colorscale: 'Reds',
     };
-
-    // evaluate the function z = 7x + 3y for each x and y value
-    var z2 = x.map((xi) =>
-      y.map((yi) => {
-        const zi = 7*xi + 3*yi;
-        return zi;
-      })
-    );
 
     var trace2 = {
       type: 'surface',
       x: x,
       y: y,
       z: z2,
-      colorscale: 'blues',
+      colorscale: 'Blues',
     };
 
     return (
@@ -51,9 +51,11 @@ class GraphArea extends React.Component {
             zaxis: { title: 'Z' },
           },
           margin: { l: 0, r: 0, b: 0, t: 0 },
+          showlegend: false,
         }}
         style={{ width: '100%', height: '100%' }}
         useResizeHandler={true}
+        config={ {displaylogo: false, displayModeBar: 'hover', MathJax: true} }
       />
     );
   }

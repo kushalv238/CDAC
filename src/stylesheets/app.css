@@ -39,3 +39,6 @@ main {
     display: none !important;
 }
 
+.infolayer {
+    display: none;
+}
