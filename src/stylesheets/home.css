@@ -1,13 +1,12 @@
 #home {
-    background-color: blue;
-
+    background-color: white;
     display: flex;
     width: 100%;
 }
 
 #side-panel {
     width: 25%;
-    background-color: pink;
+    background-color: grey;
 }
 
 #graph-area {
