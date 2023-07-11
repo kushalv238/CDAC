@@ -1,19 +1,37 @@
 #home {
     background-color: white;
     display: flex;
+    flex-wrap: wrap;
     width: 100%;
 }
 
 #side-panel {
-    width: 25%;
+    width: 20%;
     background-color: grey;
 
     overflow-y: scroll;
 }
 
 #graph-area {
-    width: 100%;
+    width: 80%;
     background-color: cyan;
+    
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.angle-list {
+    width: 99%;
+    height: 4%;
+
+    overflow-y: scroll;
+}
+
+.plot {
+    width: 99% !important;
+    height: 95% !important;
 }
 
 @media only screen and (max-width: 1200px) {

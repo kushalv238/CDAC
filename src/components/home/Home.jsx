@@ -1,17 +1,17 @@
+import { useState } from 'react';
+
 import GraphArea from './Graph/GraphArea';
-import React, { useState } from 'react';
+import PlaneEquationForm from './Side/SidePanel';
 
 import './../../stylesheets/home.css';
-import PlaneEquationForm from './Side/SidePanel';
 
 const Home = () => {
 	const [planes, setPlanes] = useState([]);
-	// console.log(planes)
-	const [colors, setColors] = useState([]);
+	
 	return (
 		<div id='home'>
 			<PlaneEquationForm planes={planes} setPlanes={setPlanes} />
-			<GraphArea planes={planes} colors={colors} setColors={setColors} />
+			<GraphArea planes={planes} />
 		</div>
 	)
 }
