@@ -1,8 +1,8 @@
-import GraphArea from './GraphArea';
+import GraphArea from './Graph/GraphArea';
 import React, { useState } from 'react';
 
 import './../../stylesheets/home.css';
-import PlaneEquationForm from './SidePanel';
+import PlaneEquationForm from './Side/SidePanel';
 
 const Home = () => {
 	const [planes, setPlanes] = useState([]);

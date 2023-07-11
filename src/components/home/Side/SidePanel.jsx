@@ -9,10 +9,10 @@ class Plane {
 	#d
 
 	constructor(equation) {
-		this.#a = equation[0];
-		this.#b = equation[1];
-		this.#c = equation[2];
-		this.#d = equation[3];
+		this.#a = equation[0] ? equation[0] : 0;
+		this.#b = equation[1] ? equation[1] : 0;
+		this.#c = equation[2] ? equation[2] : 0;
+		this.#d = equation[3] ? equation[3] : 0;
 	}
 
 	// getCoordinates() {
@@ -25,10 +25,10 @@ class Plane {
 	// }
 
 	set coordinates(coordinates) {
-		this.#a = coordinates.a;
-		this.#b = coordinates.b;
-		this.#c = coordinates.c;
-		this.#d = coordinates.d;
+		this.#a = coordinates.a ? coordinates.a : 0;
+		this.#b = coordinates.b ? coordinates.b : 0;
+		this.#c = coordinates.c ? coordinates.c : 0;
+		this.#d = coordinates.d ? coordinates.d : 0;
 	}
 
 	get coordinates() {
@@ -109,7 +109,17 @@ const PlaneEquationForm = ({ planes, setPlanes }) => {
 			}
 			
 			<div>
-				<button onClick={handleAddPlane}>Add Plane</button>
+				<button
+					onClick={handleAddPlane}
+					style={{
+						color: "white",
+						padding: "10px 15px",
+						border: "none",
+						borderRadius: "0.8rem" ,
+						backgroundColor: "green",
+						cursor: "pointer"
+					}}
+				>Add Plane</button>
 			</div>
 		</div>
 	);

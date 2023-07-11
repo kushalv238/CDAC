@@ -42,7 +42,6 @@ class GraphArea extends React.Component {
 
 		const dotProduct = math.dot(normal1, normal2);
 
-		console.log(dotProduct)
 		const magnitudes = math.norm(normal1) * math.norm(normal2);
 
 		// Calculate the angle between the two planes
@@ -67,8 +66,9 @@ class GraphArea extends React.Component {
 		}
 		return angles;
 	}
-
+	
 	render() {
+		// ax + by + cz = d
 		const { planes } = this.props;
 
 		const createUnitNormalVector = (a, b, c) => {
@@ -88,26 +88,14 @@ class GraphArea extends React.Component {
 			return result;
 		}
 
-		// const a = 2;
-		// const b = 4;
-		// const c = -5;
-		// const d = 0;
-
-		// const a1 = 3;
-		// const b1 = 1;
-		// const c1 = 2;
-		// const d1 = 0;
-
-		// ax + by + cz = d
-
 		function calculatePlaneIntersection(a1, b1, c1, d1, a2, b2, c2, d2) {
 			const crossProduct = calculateCrossProduct([a1, b1, c1], [a2, b2, c2]);
 
 			if (crossProduct === [0, 0, 0]) return [];
 
 			const intersectionPoint = [
-				(-d1 * b2 + d2 * b1) / (a1 * b2 - a2 * b1),
-				(d1 * a2 - d2 * a1) / (a1 * b2 - a2 * b1),
+				(d1 * b2 - d2 * b1) / (a1 * b2 - a2 * b1),
+				(-d1 * a2 + d2 * a1) / (a1 * b2 - a2 * b1),
 				0
 			];
 
@@ -144,53 +132,23 @@ class GraphArea extends React.Component {
 
 		planes.forEach((plane1, index1) => {
 			const { a: a1, b: b1, c: c1, d: d1 } = plane1.coordinates;
-			const unitNormalVector1 = createUnitNormalVector(a1, b1, c1);
 
-			planes.forEach((plane2, index2) => {
-				if (index1 < index2) {
-					const { a: a2, b: b2, c: c2, d: d2 } = plane2.coordinates;
+			const vector1 = [1, 0, (d1 - a1) / c1];
+			const vector2 = [0, 1, (d1 - b1) / c1];
+			const crossProduct = calculateCrossProduct(vector1, vector2)
 
-					// Calculate the intersection point of the two planes
-					const intersectionPoint = calculatePlaneIntersection(a1, b1, c1, d1, a2, b2, c2, d2);
-
-					if (!intersectionPoint?.length) return;
-
-					// Add trace for the intersection point
-					data.push({
-						name: `IP ${index1 + 1} - ${index2 + 1}`,
-						type: 'scatter3d',
-						x: [intersectionPoint[0]],
-						y: [intersectionPoint[1]],
-						z: [intersectionPoint[2]],
-						mode: 'markers',
-						marker: { color: 'red', size: 10 },
-					});
-
-					// Add trace for the intersection line of the normals
-					// data.push({
-					// 	name: `Intersection Line ${index1 + 1} - ${index2 + 1}`,
-					// 	type: 'scatter3d',
-					// 	x: [intersectionPoint[0] - unitNormalVector1[0], intersectionPoint[0] + unitNormalVector1[0]],
-					// 	y: [intersectionPoint[1] - unitNormalVector1[1], intersectionPoint[1] + unitNormalVector1[1]],
-					// 	z: [intersectionPoint[2] - unitNormalVector1[2], intersectionPoint[2] + unitNormalVector1[2]],
-					// 	mode: 'lines',
-					// 	line: { color: 'blue', width: 5 },
-					// });
-				}
-			});
-
-			// Add trace for the normal vector of each plane
 			const offset = [1, 1, 1]; // Adjust the offset as needed
 			const sidePoint1 = [
-				offset[0] - unitNormalVector1[0],
-				offset[1] - unitNormalVector1[1],
-				offset[2] - unitNormalVector1[2],
+				offset[0] - crossProduct[0],
+				offset[1] - crossProduct[1],
+				offset[2] - crossProduct[2],
 			];
 			const sidePoint2 = [
-				offset[0] + unitNormalVector1[0],
-				offset[1] + unitNormalVector1[1],
-				offset[2] + unitNormalVector1[2],
+				offset[0] + crossProduct[0],
+				offset[1] + crossProduct[1],
+				offset[2] + crossProduct[2],
 			];
+
 			data.push({
 				name: `Normal ${index1 + 1}`,
 				type: 'scatter3d',
@@ -201,39 +159,6 @@ class GraphArea extends React.Component {
 				line: { color: this.state.colors[index1], width: 5 },
 			});
 		});
-
-		// const offset = [0, 0, 0];
-		// planes.map((plane, index) => {
-		// 	const { a, b, c, d } = plane.coordinates;
-
-		// 	const unitNormalVector = createUnitNormalVector(a, b, c);
-
-		// 	const sidePoint1 = [
-		// 		offset[0] - unitNormalVector[0],
-		// 		offset[1] - unitNormalVector[1],
-		// 		offset[2] - unitNormalVector[2]
-		// 	];
-		// 	const sidePoint2 = [
-		// 		offset[0] + unitNormalVector[0],
-		// 		offset[1] + unitNormalVector[1],
-		// 		offset[2] + unitNormalVector[2]
-		// 	];
-
-		// 	data.push(
-		// 		{
-		// 			name: `Normal of the plane P${index + 1}`,
-		// 			type: 'scatter3d',
-
-		// 			x: [sidePoint1[0], sidePoint2[0]],
-		// 			y: [sidePoint1[1], sidePoint2[1]],
-		// 			z: [sidePoint1[2], sidePoint2[2]],
-
-		// 			mode: 'lines',
-		// 			line: { color: this.state.colors[index], width: 5 },
-		// 		}
-		// 	)
-
-		// })
 
 		// Calculate angles for each pair of planes
 		const angles = this.calculateAllAngles(planes);

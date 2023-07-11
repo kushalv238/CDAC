@@ -3,16 +3,17 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 
 const GraphInfo = (props) => {
-    const[xCooefficient, setXCooefficient] = useState(0);
-    const[yCooefficient, setYCooefficient] = useState(0);
-    const[zCooefficient, setZCooefficient] = useState(0);
-    const[constant, setConstant] = useState(0);
+    const coefficient = props.plane.coordinates;
+
+    const[xCooefficient, setXCooefficient] = useState(coefficient.a);
+    const[yCooefficient, setYCooefficient] = useState(coefficient.b);
+    const[zCooefficient, setZCooefficient] = useState(coefficient.c);
+    const[constant, setConstant] = useState(coefficient.d);
 
     useEffect(() => {
         props.handleInputChange(props.idx, {a: xCooefficient, b: yCooefficient, c: zCooefficient, d: constant});
     }, [xCooefficient, yCooefficient, zCooefficient, constant])
 
-    const coefficient = props.plane.coordinates;
     
     const tempStyling = {
         planeInfoContainer: {
@@ -29,16 +30,14 @@ const GraphInfo = (props) => {
             margin: "2rem 0"
         },
         btn: {
-            color: "black",
+            color: "white",
             padding: "10px 15px",
             border: "none",
-            borderRadius: "0.8rem" 
+            borderRadius: "0.8rem",
+            cursor: "pointer"
         },
         delBtn: {
-            backgroudColor: "red"
-        },
-        addBtn: {
-            backgroudColor: "green"
+            backgroundColor: "red"
         }
         
     }
@@ -54,7 +53,7 @@ const GraphInfo = (props) => {
                     name='x-cooefficient'
                     type="number"
                     value={xCooefficient}
-                    onChange={(e) => setXCooefficient(parseInt(e.target.value))}
+                    onChange={(e) => setXCooefficient(parseFloat(e.target.value ? e.target.value : 0))}
                 />
 
                 <br />
@@ -66,7 +65,7 @@ const GraphInfo = (props) => {
                     name='y-cooefficient'
                     type="number"
                     value={yCooefficient}
-                    onChange={(e) => setYCooefficient(parseInt(e.target.value))}
+                    onChange={(e) => setYCooefficient(parseFloat(e.target.value ? e.target.value : 0))}
                 />
 
                 <br />
@@ -78,7 +77,7 @@ const GraphInfo = (props) => {
                     name='z-cooefficient'
                     type="number"
                     value={zCooefficient}
-                    onChange={(e) => setZCooefficient(parseInt(e.target.value))}
+                    onChange={(e) => setZCooefficient(parseFloat(e.target.value ? e.target.value : 0))}
                 />
 
                 <br />
@@ -90,7 +89,7 @@ const GraphInfo = (props) => {
                     name='constant'
                     type="number"
                     value={constant}
-                    onChange={(e) => setConstant(parseInt(e.target.value))}
+                    onChange={(e) => setConstant(parseFloat(e.target.value ? e.target.value : 0))}
                 />
             </div>
 
