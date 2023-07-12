@@ -1,9 +1,10 @@
 import GraphInfo from './GraphInfo';
 
 import Plane from '../Graph/Plane';
-import { getRandomColour } from '../Graph/graphUtilityFunctions';
 
-const PlaneEquationForm = ({ planes, setPlanes }) => {
+import { getRandomColour } from '../../../utils/getRandoms';
+
+const SidePanel = ({ planes, setPlanes }) => {
 	const handleAddPlane = () => {
 		setPlanes([...planes, new Plane([0, 0, 0, 0], getRandomColour())]);
 	};
@@ -13,9 +14,11 @@ const PlaneEquationForm = ({ planes, setPlanes }) => {
 		setPlanes(updatedPlanes);
 	};
 	
-	const handleInputChange = (planeIndex, coordinates) => {		
+	const handleInputChange = (planeIndex, coordinates, colour) => {		
 		const updatedPlanes = [...planes];
+		
 		updatedPlanes[planeIndex].coordinates = coordinates;
+		updatedPlanes[planeIndex].colour = colour;
 
 		setPlanes(updatedPlanes);
 	};
@@ -53,4 +56,4 @@ const PlaneEquationForm = ({ planes, setPlanes }) => {
 	);
 }
 
-export default PlaneEquationForm;
+export default SidePanel;

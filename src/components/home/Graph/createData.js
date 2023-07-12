@@ -1,4 +1,4 @@
-import { 
+import {
     calculateCrossProduct,
     calculatePlaneIntersection,
     calculateAllAngles,
@@ -12,10 +12,24 @@ function createData(planes) {
         const { a, b, c, d } = plane.coordinates;
         const { colour } = plane.colour
 
-        const z = [
-            [(d - a * -1 - b * -1) / c, (d - a * -1 - b * 1) / c],
-            [(d - a * 1 - b * -1) / c, (d - a * 1 - b * 1) / c]
-        ];
+        // const z = [
+        //     [(d - a * -1 - b * -1) / c, (d - a * -1 - b * 1) / c],
+        //     [(d - a * 1 - b * -1) / c, (d - a * 1 - b * 1) / c]
+        // ];
+
+        let z;
+        if (c !== 0) {
+            z = [
+                [(d - a * -1 - b * -1) / c, (d - a * -1 - b * 1) / c],
+                [(d - a * 1 - b * -1) / c, (d - a * 1 - b * 1) / c]
+            ];
+        } else {
+            // Handle the case when c is zero (plane is parallel to Z-axis)
+            z = [
+                [d / a, d / a],
+                [d / a, d / a]
+            ];
+        }
 
         return {
             name: `Plane ${index + 1}`,
@@ -79,7 +93,7 @@ function createData(planes) {
                     x: [intersectionPoint[0]],
                     y: [intersectionPoint[1]],
                     z: [intersectionPoint[2]],
-                    
+
                     mode: 'markers',
                     marker: { color: 'red', size: 10 },
                 });
@@ -89,7 +103,7 @@ function createData(planes) {
 
     const angles = calculateAllAngles(planes);
 
-    return {data, angles};
+    return { data, angles };
 }
 
 export default createData;

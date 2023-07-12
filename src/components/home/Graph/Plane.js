@@ -1,4 +1,5 @@
-//The plane class needs coordinates and a colour as parameters
+//The Plane class defines the propperties of a plane
+//It needs coordinates and a colour (in 'rgb(a, b, c)' fromat only) as it's parameters
 //Plane class has it's own settters and getters for coordinates and colour
 
 class Plane {

@@ -1,9 +1,5 @@
 import * as math from 'mathjs';
 
-function getRandomColour() {
-    return `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
-}
-
 function calculateCrossProduct(vector1, vector2) {
     return [
         vector1[1] * vector2[2] - vector1[2] * vector2[1],
@@ -78,7 +74,6 @@ function calculateAllAngles(planes) {
 }
 
 export {
-    getRandomColour,
     calculateCrossProduct,
     createUnitNormalVector,
     calculatePlaneIntersection,

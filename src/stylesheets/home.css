@@ -9,6 +9,7 @@
     width: 20%;
     background-color: grey;
 
+    height: 92vh;
     overflow-y: scroll;
 }
 
