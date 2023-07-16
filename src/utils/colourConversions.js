@@ -35,4 +35,4 @@ function hexToRGB(hexStr) {
     return "rgb(" + r + ", " + g + ", " + b + ")";
 }
 
-export {rgbToHex, hexToRGB}
+export { rgbToHex, hexToRGB }

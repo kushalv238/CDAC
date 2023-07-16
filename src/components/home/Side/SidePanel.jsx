@@ -6,7 +6,7 @@ import { getRandomColour } from '../../../utils/getRandoms';
 
 const SidePanel = ({ planes, setPlanes }) => {
 	const handleAddPlane = () => {
-		setPlanes([...planes, new Plane([0, 0, 0, 0], getRandomColour())]);
+		setPlanes([...planes, new Plane([0, 0, 0, 0])]);
 	};
 	
 	const handleDeletePlane = (planeIndex) => {

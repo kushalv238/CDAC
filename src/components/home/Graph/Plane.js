@@ -2,6 +2,8 @@
 //It needs coordinates and a colour (in 'rgb(a, b, c)' fromat only) as it's parameters
 //Plane class has it's own settters and getters for coordinates and colour
 
+import { getRandomColour } from "../../../utils/getRandoms"
+
 class Plane {
 	#a
 	#b
@@ -9,7 +11,7 @@ class Plane {
 	#d
 	#colour
 
-	constructor(equation, colour) {
+	constructor(equation, colour = getRandomColour()) {
 		this.#a = equation[0] ? equation[0] : 0;
 		this.#b = equation[1] ? equation[1] : 0;
 		this.#c = equation[2] ? equation[2] : 0;

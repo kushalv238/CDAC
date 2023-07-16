@@ -18,6 +18,14 @@ const GraphInfo = (props) => {
         props.handleInputChange(props.idx, { a: xCooefficient, b: yCooefficient, c: zCooefficient, d: constant }, hexToRGB(colour));
     }, [xCooefficient, yCooefficient, zCooefficient, constant, colour])
 
+    useEffect(() => {
+        setXCooefficient(coefficient.a)
+        setYCooefficient(coefficient.b)
+        setZCooefficient(coefficient.c)
+        setConstant(coefficient.d)
+        setColour(rgbToHex(props.plane.colour.colour))
+    }, [props.plane])
+
     const tempStyling = {
         planeInfoContainer: {
             margin: props.idx === 0 ? "0 0 1rem 0" : "1rem 0"

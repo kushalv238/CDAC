@@ -17,6 +17,7 @@ function createData(planes) {
         //     [(d - a * 1 - b * -1) / c, (d - a * 1 - b * 1) / c]
         // ];
 
+        // TODO: Fix this
         let z;
         if (c !== 0) {
             z = [
