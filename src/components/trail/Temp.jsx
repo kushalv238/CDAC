@@ -1,54 +1,24 @@
-import Plot from 'react-plotly.js';
 import { useState } from 'react';
-import * as math from 'mathjs';
-
+import Trial from './Trial';
+import { useEffect } from 'react';
 
 const Temp = () => {
-    const [plane1, setPlane1] = useState({
-        normal: [1, 0, 0],
-        origin: [0, 0, 0],
-    });
-    const [plane2, setPlane2] = useState({
-        normal: [0, 1, 0],
-        origin: [0, 0, 0],
-    });
+    const[num, setNum] = useState(3);
 
-    const angle = math.acos(math.dot(plane1.normal, plane2.normal));
+    useEffect(()=>{
+        console.log(num)
+    },[num])
+    
+    function increment() {
+        console.log("incr")
+        setNum(prev=>prev+1)
+    }
+    function decrement() {
+        console.log("decr")
+        setNum(prev=>prev-1)
+    }
 
-    const rotatedPlane2 = {
-        normal: math.rotate(plane2.normal, angle),
-        origin: plane2.origin,
-    };
-
-    return (
-        <div>
-            <Plot
-                width={400}
-                height={400}
-                data={[
-                    {
-                        type: "surface",
-                        x: [-1, 1],
-                        y: [-1, 1],
-                        z: (x, y) => math.sqrt(x * x + y * y),
-                    },
-                    {
-                        type: "plane",
-                        normal: plane1.normal,
-                        origin: plane1.origin,
-                    },
-                    {
-                        type: "plane",
-                        normal: rotatedPlane2.normal,
-                        origin: rotatedPlane2.origin,
-                    },
-                ]}
-                layout={{
-                    title: "Two Planes",
-                }}
-            />
-        </div>
-    );
+    return <Trial num={num} increment={increment} decrement={decrement} />
 };
 
 export default Temp

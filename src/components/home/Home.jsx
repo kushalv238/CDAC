@@ -19,7 +19,7 @@ const Home = () => {
 		: 
 			[]
 	);
-
+	
 	useEffect(()=> {
 		const planesInfo = planes.map((plane, index)=>{
 			const { a, b, c, d } = plane.coordinates;

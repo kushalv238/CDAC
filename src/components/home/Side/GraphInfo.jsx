@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react'
 //Since input type color takes color value as #rrggbb only and we use a colour scheme of rgb(a, b, c);
 //we import functions from utils to convert between the two colour scheme
 import { rgbToHex, hexToRGB } from '../../../utils/colourConversions';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const GraphInfo = (props) => {
     const coefficient = props.plane.coordinates;
@@ -13,10 +15,15 @@ const GraphInfo = (props) => {
     const [zCooefficient, setZCooefficient] = useState(coefficient.c);
     const [constant, setConstant]           = useState(coefficient.d);
     const [colour, setColour]               = useState(rgbToHex(props.plane.colour.colour));
+    const [isVisible, setIsVisible]         = useState(props.plane.visibility)
 
     useEffect(() => {
-        props.handleInputChange(props.idx, { a: xCooefficient, b: yCooefficient, c: zCooefficient, d: constant }, hexToRGB(colour));
-    }, [xCooefficient, yCooefficient, zCooefficient, constant, colour])
+        props.handleInputChange(props.idx, { a: xCooefficient, b: yCooefficient, c: zCooefficient, d: constant }, hexToRGB(colour), isVisible);
+    }, [xCooefficient, yCooefficient, zCooefficient, constant, colour, isVisible])
+
+    useEffect(()=> {
+
+    }, [isVisible])
 
     useEffect(() => {
         setXCooefficient(coefficient.a)
@@ -24,6 +31,7 @@ const GraphInfo = (props) => {
         setZCooefficient(coefficient.c)
         setConstant(coefficient.d)
         setColour(rgbToHex(props.plane.colour.colour))
+        setIsVisible(props.plane.visibility)
     }, [props.plane])
 
     const tempStyling = {
@@ -49,12 +57,39 @@ const GraphInfo = (props) => {
         },
         delBtn: {
             backgroundColor: "red"
+        },
+        flex: {
+            display: "flex",
+            flexWrap: "wrap",
+            alignItems: "center",
+            justifyContent: "space-between"
+        },
+        eyeIcon: {
+            display: "flex",
+            width: "40%",
+            justifyContent: "space-between",
         }
     }
 
     return (
         <div id="plane-info" style={tempStyling.planeInfoContainer}>
-            <h3 style={tempStyling.planeHeading}>Plane {props.idx + 1}</h3>
+            <div style={{...tempStyling.flex, width: "60%"}}>
+                <h3 style={tempStyling.planeHeading}>Plane {props.idx + 1}</h3>
+                <div style={tempStyling.eyeIcon}>
+                    <FontAwesomeIcon
+                        title='toggle plane visibility'
+                        onClick={()=>{setIsVisible({plane: !isVisible.plane, normal: isVisible.normal})}}
+                        icon={isVisible.plane ? faEye : faEyeSlash}
+                        style={{cursor: "pointer", color: isVisible.plane ? "green" : "red"}}
+                        />
+                    <FontAwesomeIcon
+                        title='toggle normal visibility'
+                        onClick={()=>{setIsVisible({plane: isVisible.plane, normal: !isVisible.normal})}}
+                        icon={isVisible.normal ? faEye : faEyeSlash}
+                        style={{cursor: "pointer", color: isVisible.normal ? "green" : "red"}}
+                    />
+                </div>
+            </div>
             <input
                 title={hexToRGB(colour)}
                 type="color"

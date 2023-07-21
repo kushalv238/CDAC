@@ -4,13 +4,13 @@ import {
     calculateAllAngles,
 } from './graphUtilityFunctions'
 
-const offset = [1, 1, 1]; // Adjust the normal intersection offset as needed
+const offset = [0, 0, 0]; // Adjust the normal intersection offset as needed
 
 // Creates the plotting data and angles between each normals from the array of Plane objects
 function createData(planes) {
-    const data = planes.map((plane, index) => {
+    const data = planes.map((plane, index) => {        
         const { a, b, c, d } = plane.coordinates;
-        const { colour } = plane.colour
+        const { colour } = plane.visibility.plane ? plane.colour : {colour: "transparent"}
 
         // const z = [
         //     [(d - a * -1 - b * -1) / c, (d - a * -1 - b * 1) / c],
@@ -27,8 +27,11 @@ function createData(planes) {
         } else {
             // Handle the case when c is zero (plane is parallel to Z-axis)
             z = [
-                [d / a, d / a],
-                [d / a, d / a]
+                [(d - a * -1 - b * -1) / c, (d - a * -1 - b * 1) / c],
+                [(d - a * 1 - b * -1) / c, (d - a * 1 - b * 1) / c]
+
+                // [d / a, d / a],
+                // [d / a, d / a]
             ];
         }
 
@@ -50,7 +53,7 @@ function createData(planes) {
 
     planes.forEach((plane1, index1) => {
         const { a: a1, b: b1, c: c1, d: d1 } = plane1.coordinates;
-        const { colour } = plane1.colour
+        const { colour } = plane1.visibility.normal ? plane1.colour : {colour: "transparent"}
 
         const vector1 = [1, 0, (-a1) / c1];
         const vector2 = [0, 1, (-b1) / c1];
