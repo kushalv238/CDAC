@@ -13,17 +13,18 @@ const GraphInfo = (props) => {
     const [xCooefficient, setXCooefficient] = useState(coefficient.a);
     const [yCooefficient, setYCooefficient] = useState(coefficient.b);
     const [zCooefficient, setZCooefficient] = useState(coefficient.c);
-    const [constant, setConstant]           = useState(coefficient.d);
-    const [colour, setColour]               = useState(rgbToHex(props.plane.colour.colour));
-    const [isVisible, setIsVisible]         = useState(props.plane.visibility)
+    const [constant, setConstant] = useState(coefficient.d);
+    const [colour, setColour] = useState(rgbToHex(props.plane.colour.colour));
+    const [isVisible, setIsVisible] = useState(props.plane.visibility)
 
     useEffect(() => {
         props.handleInputChange(props.idx, { a: xCooefficient, b: yCooefficient, c: zCooefficient, d: constant }, hexToRGB(colour), isVisible);
     }, [xCooefficient, yCooefficient, zCooefficient, constant, colour, isVisible])
 
-    useEffect(()=> {
-
-    }, [isVisible])
+    useEffect(() => {
+        //console.log(props.hidePlanes,props.hideNormals)
+        setIsVisible({ plane: props.hidePlanes ? false : true, normal: props.hideNormals ? false : true })
+    }, [props.hidePlanes, props.hideNormals])
 
     useEffect(() => {
         setXCooefficient(coefficient.a)
@@ -73,20 +74,20 @@ const GraphInfo = (props) => {
 
     return (
         <div id="plane-info" style={tempStyling.planeInfoContainer}>
-            <div style={{...tempStyling.flex, width: "60%"}}>
+            <div style={{ ...tempStyling.flex, width: "60%" }}>
                 <h3 style={tempStyling.planeHeading}>Plane {props.idx + 1}</h3>
                 <div style={tempStyling.eyeIcon}>
                     <FontAwesomeIcon
                         title='toggle plane visibility'
-                        onClick={()=>{setIsVisible({plane: !isVisible.plane, normal: isVisible.normal})}}
+                        onClick={() => { setIsVisible({ plane: !isVisible.plane, normal: isVisible.normal }) }}
                         icon={isVisible.plane ? faEye : faEyeSlash}
-                        style={{cursor: "pointer", color: isVisible.plane ? "green" : "red"}}
-                        />
+                        style={{ cursor: "pointer", color: isVisible.plane ? "green" : "red" }}
+                    />
                     <FontAwesomeIcon
                         title='toggle normal visibility'
-                        onClick={()=>{setIsVisible({plane: isVisible.plane, normal: !isVisible.normal})}}
+                        onClick={() => { setIsVisible({ plane: isVisible.plane, normal: !isVisible.normal }) }}
                         icon={isVisible.normal ? faEye : faEyeSlash}
-                        style={{cursor: "pointer", color: isVisible.normal ? "green" : "red"}}
+                        style={{ cursor: "pointer", color: isVisible.normal ? "green" : "red" }}
                     />
                 </div>
             </div>
