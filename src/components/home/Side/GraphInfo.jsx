@@ -13,9 +13,9 @@ const GraphInfo = (props) => {
     const [xCooefficient, setXCooefficient] = useState(coefficient.a);
     const [yCooefficient, setYCooefficient] = useState(coefficient.b);
     const [zCooefficient, setZCooefficient] = useState(coefficient.c);
-    const [constant, setConstant] = useState(coefficient.d);
-    const [colour, setColour] = useState(rgbToHex(props.plane.colour.colour));
-    const [isVisible, setIsVisible] = useState(props.plane.visibility)
+    const [constant, setConstant]           = useState(coefficient.d);
+    const [colour, setColour]               = useState(rgbToHex(props.plane.colour.colour));
+    const [isVisible, setIsVisible]         = useState(props.plane.visibility)
 
     useEffect(() => {
         props.handleInputChange(props.idx, { a: xCooefficient, b: yCooefficient, c: zCooefficient, d: constant }, hexToRGB(colour), isVisible);
@@ -23,7 +23,7 @@ const GraphInfo = (props) => {
 
     useEffect(() => {
         //console.log(props.hidePlanes,props.hideNormals)
-        setIsVisible({ plane: props.hidePlanes ? false : true, normal: props.hideNormals ? false : true })
+        setIsVisible({ plane: !props.hidePlanes, normal: !props.hideNormals })
     }, [props.hidePlanes, props.hideNormals])
 
     useEffect(() => {

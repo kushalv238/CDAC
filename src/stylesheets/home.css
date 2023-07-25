@@ -39,35 +39,66 @@
     position: relative;
 }
 
-.triangle {
-    width: 0; 
-    height: 0; 
-    border-top: 20px solid transparent;
-    border-bottom: 20px solid transparent; 
-    
-    border-right:20px solid dodgerblue;   
+#side-panel-options {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    margin: 1rem 0;
+}
+
+#side-panel-options > * {
+    cursor: pointer;
+}
+
+#plane-info input {
+    width: 3rem;
 }
 
 .instruction {
-    position: absolute;
-    left: 30%;
-    top: 1%;
-
-    
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    
-    
-    /* padding: 0.5rem 1rem; */
-    
 }
 
-.text {
-    padding: 10px 0;
+.instruction-text {
+    padding: 5px;
     color: white;
     background-color: dodgerblue;
+}
+
+#tutorialWrapper {
+    position: absolute;
+    inset: 0;
+
+    margin: auto;
+
+    width: 40rem;
+    height: 30rem;
+
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+
+    z-index: 5;
+
+    /* overflow: hidden !important; */
+}
+
+.carouselImg {
+    width: 100%;
+}
+
+.carousel-control-next,
+.carousel-control-prev,
+.carousel-indicators {
+    filter: invert(100%);
+}
+
+#tut-caption {
+    width: 100%;
+    text-align: end;
+    color: cyan;
 }
 
 @media only screen and (max-width: 1200px) {
@@ -92,8 +123,10 @@
         bottom: 0;
         
         width: 100%;
-        height: 20rem;
+        height: 10rem;
         
         order: 2;
+
+        z-index: 6;
     }
 }

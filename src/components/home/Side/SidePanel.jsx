@@ -1,10 +1,12 @@
-import GraphInfo from './GraphInfo';
-
-import Plane from '../Graph/Plane';
-
 import { useState, useEffect } from 'react';
 
-const SidePanel = ({ planes, setPlanes }) => {
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+
+import GraphInfo from './GraphInfo';
+import Plane from '../Graph/Plane';
+
+const SidePanel = ({ planes, setPlanes, setTutorialActive, buttonRef }) => {
 	const [instructionClicked, setInstructionClicked] = useState(planes?.length ? true : false);
 	const [hidePlanes, setHidePlanes] = useState(false);
 	const [hideNormals, setHideNormals] = useState(false);
@@ -39,9 +41,10 @@ const SidePanel = ({ planes, setPlanes }) => {
 	return (
 
 		<div id="side-panel" style={{ padding: "0.4rem" }}>
-			<div >
+			<div id="side-panel-options">
 				<button className="button" onClick={() => setHidePlanes(prev => !prev)}>{hidePlanes ? 'show' : 'hide'} all planes</button>
 				<button onClick={() => setHideNormals(prev => !prev)}>{hideNormals ? 'show' : 'hide'} all normals</button>
+				<FontAwesomeIcon onClick={() => setTutorialActive(true)} icon={faQuestionCircle} title='See Tutorial' ref={buttonRef} />
 			</div>
 			{
 				planes.map(
@@ -58,18 +61,9 @@ const SidePanel = ({ planes, setPlanes }) => {
 					)
 				)
 			}
-			{
-				!instructionClicked &&
-				<div className="instruction">
-					<div className="triangle"></div>
-					<div className="text">
-						Click to add a plane
-					</div>
-				</div>
-			}
 
 
-			<div>
+			<div className='flex justify-content-start gap-3'>
 				<button
 					onClick={handleAddPlane}
 					style={{
@@ -81,6 +75,15 @@ const SidePanel = ({ planes, setPlanes }) => {
 						cursor: "pointer"
 					}}
 				>Add Plane</button>
+				{
+					!instructionClicked &&
+					<div className="instruction">
+						<div className="triangle-left"></div>
+						<div className="instruction-text">
+							Click to add a plane
+						</div>
+					</div>
+				}
 			</div>
 		</div>
 	);

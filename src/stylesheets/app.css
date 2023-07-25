@@ -35,10 +35,69 @@ main {
 
 /* utility classes */
 
-.hidden, .hidden > * {
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hidden,
+.hidden>* {
     display: none !important;
 }
 
 .infolayer {
     display: none;
+}
+
+.triangle-left {
+    width: 0;
+    height: 0;
+    border-top: 25px solid transparent;
+    border-bottom: 25px solid transparent;
+
+    border-right: 25px solid dodgerblue;
+}
+
+.triangle-right {
+    width: 0;
+    height: 0;
+    border-top: 25px solid transparent;
+    border-bottom: 25px solid transparent;
+
+    border-left: 25px solid dodgerblue;
+}
+
+.closeButton,
+.playPauseButton {
+    position: absolute;
+    top: 2%;
+    right: 2%;
+
+    cursor: pointer;
+
+    z-index: 6;
+
+    width: 1rem;
+
+    font-size: 1.5rem;
+
+    /* color: white; */
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+}
+
+.playPauseButton {
+    left: 2%;
+}
+
+.grey-BG {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    inset: 0;
+
+    background-color: rgba(33, 27, 27, 0.579);
+
+    z-index: 5;
 }
