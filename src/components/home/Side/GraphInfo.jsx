@@ -7,32 +7,32 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const GraphInfo = (props) => {
-    const coefficient = props.plane.coordinates;
+    const plane = props.plane
+    const coefficient = plane.coordinates;
 
     //Get and set plane properties
     const [xCooefficient, setXCooefficient] = useState(coefficient.a);
     const [yCooefficient, setYCooefficient] = useState(coefficient.b);
     const [zCooefficient, setZCooefficient] = useState(coefficient.c);
-    const [constant, setConstant]           = useState(coefficient.d);
-    const [colour, setColour]               = useState(rgbToHex(props.plane.colour.colour));
-    const [isVisible, setIsVisible]         = useState(props.plane.visibility)
+    const [constant, setConstant] = useState(coefficient.d);
+    const [colour, setColour] = useState(rgbToHex(plane.colour.colour));
+    const [isVisible, setIsVisible] = useState({ plane: !props.hidePlanes && plane.visibility.plane, normal: !props.hideNormals && plane.visibility.normal })
 
     useEffect(() => {
         props.handleInputChange(props.idx, { a: xCooefficient, b: yCooefficient, c: zCooefficient, d: constant }, hexToRGB(colour), isVisible);
     }, [xCooefficient, yCooefficient, zCooefficient, constant, colour, isVisible])
 
     useEffect(() => {
-        //console.log(props.hidePlanes,props.hideNormals)
         setIsVisible({ plane: !props.hidePlanes, normal: !props.hideNormals })
     }, [props.hidePlanes, props.hideNormals])
-
+    
     useEffect(() => {
         setXCooefficient(coefficient.a)
         setYCooefficient(coefficient.b)
         setZCooefficient(coefficient.c)
         setConstant(coefficient.d)
-        setColour(rgbToHex(props.plane.colour.colour))
-        setIsVisible(props.plane.visibility)
+        setColour(rgbToHex(plane.colour.colour))
+        setIsVisible({ plane: !props.hidePlanes && plane.visibility.plane, normal: !props.hideNormals && plane.visibility.normal })
     }, [props.plane])
 
     const tempStyling = {
@@ -45,9 +45,6 @@ const GraphInfo = (props) => {
         planeEquation: {
             fontSize: "1.2rem",
             fontWeight: 600
-        },
-        my2: {
-            margin: "2rem 0"
         },
         btn: {
             color: "white",
@@ -148,7 +145,7 @@ const GraphInfo = (props) => {
             <span>Equation:</span>
             <span style={tempStyling.planeEquation}>{xCooefficient}x + {yCooefficient}y + {zCooefficient}z = {constant}</span>
 
-            <span style={tempStyling.my2}>
+            <span>
                 <h4>Coefficients:</h4>
                 <p>a: {coefficient.a}</p>
                 <p>b: {coefficient.b}</p>

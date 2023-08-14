@@ -5,16 +5,89 @@
     width: 100%;
 }
 
+#tutorial-bttn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 1.5rem;
+
+    cursor: pointer;
+}
+
 #side-panel {
-    width: 20%;
+    width: 25%;
     background-color: grey;
 
-    height: 92vh;
+    height: 90vh;
+    position: relative;
+}
+
+.side-panel-small > *:not(#panel-toggle-btn) {
+    display: none !important;
+}
+
+.side-panel-small {
+    width: 3% !important;
+}
+
+.graph-area-big {
+    width: 97% !important   ;
+}
+
+#panel-toggle-btn {
+    position: absolute;
+    right: 0;
+    
+    border: 2px solid rgb(53, 53, 53);
+
+    padding: 0 5px;
+    margin: 0 0.5rem;
+
+    cursor: pointer;
+}
+
+.side-panel-small>#panel-toggle-btn {
+    right: auto;
+    margin: 0;
+}
+
+.side-panel-small {
+    display: flex;
+    justify-content: center;
+}
+
+#panel-toggle-btn:hover {
+    background-color: dodgerblue;
+}
+
+#side-panel-options {
+    width: 100%;
+    height: 10%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#side-panel-options > * {
+    cursor: pointer;
+}
+
+#plane-info input {
+    width: 3rem;    
+}
+
+#add-plane-bttn-wrapper {
+    height: 10%;
+}
+
+#graph-details-wrapper {
     overflow-y: scroll;
+    height: 80%;
 }
 
 #graph-area {
-    width: 80%;
+    width: 75%;
     background-color: cyan;
     
     display: flex;
@@ -30,30 +103,9 @@
     overflow-y: scroll;
 }
 
-.plot {
+#plot {
     width: 99% !important;
     height: 95% !important;
-}
-
-#side-panel {
-    position: relative;
-}
-
-#side-panel-options {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-
-    margin: 1rem 0;
-}
-
-#side-panel-options > * {
-    cursor: pointer;
-}
-
-#plane-info input {
-    width: 3rem;
 }
 
 .instruction {
@@ -75,12 +127,12 @@
 
     margin: auto;
 
-    width: 40rem;
-    height: 30rem;
+    width: 35%;
+    height: 50%;
 
     box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
 
-    z-index: 5;
+    z-index: 7;
 
     /* overflow: hidden !important; */
 }
@@ -105,11 +157,42 @@
     #side-panel {
         width: 40%;
     }
+    #graph-area {
+        width: 58%;
+    }
+
+    .side-panel-small {
+        width: 5% !important;
+    }
+    
+    .graph-area-big {
+        width: 95% !important;
+    }
+
+    #tutorialWrapper {
+        width: 60%;
+        height: 80%;
+    }
 }
 
 @media only screen and (max-width: 900px) {
     #side-panel {
-        width: 50%;
+        z-index: 5;
+        position: absolute;
+        width: 60vw;
+    }
+
+    .side-panel-small {
+        width: 2rem !important;
+    }
+
+    #graph-area {
+        width: 99% !important;
+    }
+
+    #tutorialWrapper {
+        width: 70%;
+        height: 85%;
     }
 }
 
@@ -119,14 +202,11 @@
     }
 
     #side-panel {
-        position: fixed;
-        bottom: 0;
-        
-        width: 100%;
-        height: 10rem;
-        
-        order: 2;
+        width: 80vw;
+    }
 
-        z-index: 6;
+    #tutorialWrapper {
+        width: 90%;
+        height: 80%;
     }
 }

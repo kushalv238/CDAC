@@ -5,7 +5,7 @@ const GraphArea = props => {
 	const { data, angles } = createData(props.planes)
 
 	return (
-		<div id="graph-area">
+		<div id="graph-area" className={`${!props.panelVisible ? 'graph-area-big' : ''}`}>
 			<div className="angle-list">
 				{
 					angles.map((angleInfo, index) => (
@@ -13,7 +13,7 @@ const GraphArea = props => {
 					))
 				}
 			</div>
-			<Graph data={data} />
+			<Graph data={data} panelVisible={props.panelVisible} />
 		</div>
 	);
 
