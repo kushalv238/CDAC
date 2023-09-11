@@ -5,7 +5,7 @@ import Plane from '../Graph/Plane';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faX } from '@fortawesome/free-solid-svg-icons';
 
-const SidePanel = ({ planes, setPlanes, panelVisible, setPanelVisible }) => {
+const SidePanel = ({ planes, setPlanes, panelVisible, setPanelVisible, panelRef, panelButtonRef }) => {
 	const [instructionClicked, setInstructionClicked] = useState(planes?.length ? true : false);
 	const [hidePlanes, setHidePlanes] = useState(false);
 	const [hideNormals, setHideNormals] = useState(false);
@@ -41,12 +41,13 @@ const SidePanel = ({ planes, setPlanes, panelVisible, setPanelVisible }) => {
 
 	return (
 
-		<div id="side-panel" className={`${!panelVisible ? 'side-panel-small' : ''}`} style={{ padding: "0.4rem" }}>
+		<div id="side-panel" className={`${!panelVisible ? 'side-panel-small' : ''}`} style={{ padding: "0.4rem" }} ref={panelRef}>
 
 			<div
 				id="panel-toggle-btn"
 				title={panelVisible ? 'hide panel' : 'show panel'}
 				onClick={() => setPanelVisible(prev => !prev)}
+				ref={panelButtonRef}
 			>
 				<FontAwesomeIcon icon={panelVisible ? faX : faBars} />
 			</div>

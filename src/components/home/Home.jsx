@@ -32,9 +32,13 @@ const Home = () => {
 	const [tutorialActive, setTutorialActive] = useState(!planes?.length);
 	const [listening, setListening] = useState(false);
 
-	const menuRef = useRef(null);
+	const tutorialRef = useRef(null);
 	const buttonRef = useRef(null);
-	useEffect(listenForOutsideClicks(listening, setListening, menuRef, buttonRef, tutorialActive, setTutorialActive));
+	useEffect(listenForOutsideClicks(listening, setListening, tutorialRef, buttonRef, tutorialActive, setTutorialActive));
+	
+	const panelRef = useRef(null);
+	const panelButtonRef = useRef(null);
+	useEffect(listenForOutsideClicks(listening, setListening, panelRef, panelButtonRef, panelVisible, setPanelVisible));
 
 	useEffect(() => {
 		const planesInfo = planes.map((plane, index) => {
@@ -68,11 +72,11 @@ const Home = () => {
 				<div className="grey-BG"></div>
 			}
 
-			<div id="tutorialWrapper" className={!tutorialActive ? "hidden" : ""} ref={menuRef}>
+			<div id="tutorialWrapper" className={!tutorialActive ? "hidden" : ""} ref={tutorialRef}>
 				<Tutorial tutorialActive={tutorialActive} setTutorialActive={setTutorialActive} />
 			</div>
 
-			<SidePanel planes={planes} setPlanes={setPlanes} panelVisible={panelVisible} setPanelVisible={setPanelVisible} />
+			<SidePanel planes={planes} setPlanes={setPlanes} panelVisible={panelVisible} setPanelVisible={setPanelVisible} panelRef={panelRef} panelButtonRef={panelButtonRef} />
 			<GraphArea planes={planes} panelVisible={panelVisible} />
 		</div>
 	)

@@ -9,7 +9,7 @@ const GraphArea = props => {
 			<div className="angle-list">
 				{
 					angles.map((angleInfo, index) => (
-						<div key={index}>{`Angle between ${angleInfo.plane1} and ${angleInfo.plane2}: ${angleInfo.angle}`}</div>
+						<div key={index}>{`Angle between ${angleInfo.plane1} and ${angleInfo.plane2}: ${(angleInfo.angle).toFixed(3)} deg`}</div>
 					))
 				}
 			</div>

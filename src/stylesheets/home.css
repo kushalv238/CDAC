@@ -101,6 +101,8 @@
     height: 4%;
 
     overflow-y: scroll;
+
+    text-align: center;
 }
 
 #plot {
