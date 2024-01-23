@@ -29,7 +29,7 @@ const Home = () => {
 
 	const menuRef = useRef(null);
 	const buttonRef = useRef(null);
-	useEffect(listenForOutsideClicks(listening, setListening, menuRef, buttonRef, tutorialActive, setTutorialActive));
+	useEffect(()=>listenForOutsideClicks(listening, setListening, menuRef, buttonRef, tutorialActive, setTutorialActive), []);
 
 
 	useEffect(() => {

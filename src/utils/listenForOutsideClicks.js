@@ -7,6 +7,7 @@ export default function listenForOutsideClicks(
     setPopUpActive
 ) {
     return () => {
+        console.log("1")
         if (listening || !menuRef.current) return;
 
         setListening(true)
@@ -15,12 +16,12 @@ export default function listenForOutsideClicks(
             const cur = menuRef.current
             const clickedNode = evt.target
 
-            if((type === `keydown` && evt.keyCode == 84)) {
+            if((type === `keydown` && evt.keyCode === 84)) {
                 setPopUpActive(true);
                 return
             }
 
-            if (cur.contains(clickedNode) || buttonRef.current.contains(clickedNode) || (type === `keydown` && evt.keyCode != 27)) return
+            if (cur.contains(clickedNode) || buttonRef.current.contains(clickedNode) || (type === `keydown` && evt.keyCode !== 27)) return
 
             setPopUpActive(false)
         }

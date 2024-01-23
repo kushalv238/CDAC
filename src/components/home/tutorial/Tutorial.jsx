@@ -14,11 +14,17 @@ const Tutorial = (props) => {
 
     useEffect(() => {
         setIndex(0)
+        setIsSliding(true)
     }, [props.tutorialActive])
 
     return (
         <>
-            <Carousel activeIndex={index} onSelect={(idx) => setIndex(idx)} interval={isSliding ? 5000 : null}>
+            <Carousel
+                activeIndex={index}
+                onSelect={(idx) => setIndex(idx)}
+                interval={isSliding ? 5000 : null}
+                pause={false}
+            >
                 <Carousel.Item>
                     <img src={plane3D} alt="3D Plane" className='carouselImg' />
                     <Carousel.Caption>
