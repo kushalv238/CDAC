@@ -1,4 +1,6 @@
-const protractor = () => {
+import './protractor.css'
+
+const Protractor = () => {
     return (
         <div id="pro">
             <div className="line"><p>180</p></div>
@@ -24,4 +26,4 @@ const protractor = () => {
     )
 }
 
-export default protractor
+export default Protractor

@@ -5,9 +5,12 @@ const Graph = props => {
 
     return (
         <Plot
-            className='plot'
+            divId='plot'
+
             data={data}
+
             layout={{
+                title: "Plot",
                 scene: {
                     xaxis: {
                         title: 'X',
@@ -42,11 +45,11 @@ const Graph = props => {
                         eye: { x: 1.5, y: -0.9, z: 0.7 },
                     },
                 },
+                autosize: true,
                 margin: { l: 0, r: 0, b: 0, t: 0 },
                 showlegend: true,
                 // paper_bgcolor: 'dodgerblue'
-            }
-        }
+            }}
             style={{ width: '100%', height: '100%' }}
             useResizeHandler={true}
 

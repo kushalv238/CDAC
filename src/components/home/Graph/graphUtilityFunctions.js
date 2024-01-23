@@ -52,7 +52,7 @@ function calculateAngle(plane1, plane2) {
 
     // Calculate the angle between the two planes
     const angleRad = math.acos(dotProduct / magnitudes);
-    const angleDeg = math.unit(angleRad, 'rad').to('deg');
+    const angleDeg = angleRad*(180.0/Math.PI)
 
     return angleDeg;
 }
