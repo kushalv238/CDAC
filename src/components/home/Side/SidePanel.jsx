@@ -2,8 +2,13 @@ import { useState } from 'react';
 
 import GraphInfo from './GraphInfo';
 import Plane from '../Graph/Plane';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faX } from '@fortawesome/free-solid-svg-icons';
+
+import './../../../stylesheets/sidepanel.css'
+
+import appLogo from './../../../resources/images/favicon.jpg'
 
 const SidePanel = ({ planes, setPlanes, panelVisible, setPanelVisible, panelRef, panelButtonRef }) => {
 	const [instructionClicked, setInstructionClicked] = useState(planes?.length ? true : false);
@@ -41,8 +46,7 @@ const SidePanel = ({ planes, setPlanes, panelVisible, setPanelVisible, panelRef,
 
 	return (
 
-		<div id="side-panel" className={`${!panelVisible ? 'side-panel-small' : ''}`} style={{ padding: "0.4rem" }} ref={panelRef}>
-
+		<div id="side-panel" className={`${!panelVisible ? 'side-panel-small' : ''}`} ref={panelRef}>
 			<div
 				id="panel-toggle-btn"
 				title={panelVisible ? 'hide panel' : 'show panel'}
@@ -52,9 +56,18 @@ const SidePanel = ({ planes, setPlanes, panelVisible, setPanelVisible, panelRef,
 				<FontAwesomeIcon icon={panelVisible ? faX : faBars} />
 			</div>
 
+			<div className="app-title">
+				<div className="app-logo">
+					<img src={appLogo} alt='App Logo' title='AppName' />
+				</div>
+				<p>
+					AppName
+				</p>
+			</div>
+
 			<div id="side-panel-options">
-				<button className="button" onClick={() => setHidePlanes(prev => !prev)}>{hidePlanes ? 'show' : 'hide'} all planes</button>
-				<button onClick={() => setHideNormals(prev => !prev)}>{hideNormals ? 'show' : 'hide'} all normals</button>
+				<button className={`${hidePlanes ? 'hidden-btn' : ''}`} onClick={() => setHidePlanes(prev => !prev)}>{hidePlanes ? 'Show' : 'Hide'} all planes</button>
+				<button className={`${hideNormals ? 'hidden-btn' : ''}`} onClick={() => setHideNormals(prev => !prev)}>{hideNormals ? 'Show' : 'Hide'} all normals</button>
 			</div>
 			{
 				planes?.length ?
@@ -82,6 +95,7 @@ const SidePanel = ({ planes, setPlanes, panelVisible, setPanelVisible, panelRef,
 				<button
 					onClick={handleAddPlane}
 					id='add-plane-bttn'
+					title='Add a plane'
 					style={{
 						color: "white",
 						padding: "10px 15px",

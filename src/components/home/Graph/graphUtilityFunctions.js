@@ -13,6 +13,12 @@ const createUnitNormalVector = (a, b, c) => {
     return [a / magnitude, b / magnitude, c / magnitude];
 };
 
+function calculateZArbitary(a, b, c, d, x_arb, y_arb, referncePoints) {
+    return (
+        referncePoints[2] + ((-a * (x_arb - referncePoints[0]) - b * (y_arb + referncePoints[1]) + d) / c)
+    );
+}
+
 function calculatePlaneIntersection(plane1, plane2) {
     const { a: a1, b: b1, c: c1, d: d1 } = plane1.coordinates;
     const { a: a2, b: b2, c: c2, d: d2 } = plane2.coordinates;
@@ -52,9 +58,8 @@ function calculateAngle(plane1, plane2) {
 
     // Calculate the angle between the two planes
     const angleRad = math.acos(dotProduct / magnitudes);
-    const angleDeg = angleRad*(180.0/Math.PI)
 
-    return angleDeg;
+    return angleRad;
 }
 
 function calculateAllAngles(planes) {
@@ -76,6 +81,8 @@ function calculateAllAngles(planes) {
 export {
     calculateCrossProduct,
     createUnitNormalVector,
+    calculateZArbitary,
     calculatePlaneIntersection,
+    calculateAngle,
     calculateAllAngles,
 }

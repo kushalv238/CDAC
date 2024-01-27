@@ -14,86 +14,22 @@
     cursor: pointer;
 }
 
-#side-panel {
-    width: 25%;
-    background-color: grey;
-
-    height: 90vh;
-    position: relative;
-}
-
-.side-panel-small > *:not(#panel-toggle-btn) {
-    display: none !important;
-}
-
-.side-panel-small {
-    width: 3% !important;
-}
-
-.graph-area-big {
-    width: 97% !important   ;
-}
-
-#panel-toggle-btn {
-    position: absolute;
-    right: 0;
-    
-    border: 2px solid rgb(53, 53, 53);
-
-    padding: 0 5px;
-    margin: 0 0.5rem;
-
-    cursor: pointer;
-}
-
-.side-panel-small>#panel-toggle-btn {
-    right: auto;
-    margin: 0;
-}
-
-.side-panel-small {
-    display: flex;
-    justify-content: center;
-}
-
-#panel-toggle-btn:hover {
-    background-color: dodgerblue;
-}
-
-#side-panel-options {
-    width: 100%;
-    height: 10%;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-}
-
-#side-panel-options > * {
-    cursor: pointer;
-}
-
-#plane-info input {
-    width: 3rem;    
-}
-
-#add-plane-bttn-wrapper {
-    height: 10%;
-}
-
-#graph-details-wrapper {
-    overflow-y: scroll;
-    height: 80%;
-}
-
 #graph-area {
     width: 75%;
-    background-color: cyan;
-    
+    background-color: white;
+
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+}
+
+#scene {
+    width: 100% !important;
+}
+
+.graph-area-big {
+    width: 97% !important;
 }
 
 .angle-list {
@@ -107,7 +43,7 @@
 
 #plot {
     width: 99% !important;
-    height: 95% !important;
+    height: calc(100% - 5rem) !important;
 }
 
 .instruction {
@@ -134,7 +70,7 @@
 
     box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
 
-    z-index: 7;
+    z-index: 12;
 
     /* overflow: hidden !important; */
 }
@@ -159,6 +95,7 @@
     #side-panel {
         width: 40%;
     }
+
     #graph-area {
         width: 58%;
     }
@@ -166,7 +103,7 @@
     .side-panel-small {
         width: 5% !important;
     }
-    
+
     .graph-area-big {
         width: 95% !important;
     }

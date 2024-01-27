@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 //we import functions from utils to convert between the two colour scheme
 import { rgbToHex, hexToRGB } from '../../../utils/colourConversions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faEyeSlash, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const GraphInfo = (props) => {
     const plane = props.plane
@@ -25,7 +25,7 @@ const GraphInfo = (props) => {
     useEffect(() => {
         setIsVisible({ plane: !props.hidePlanes, normal: !props.hideNormals })
     }, [props.hidePlanes, props.hideNormals])
-    
+
     useEffect(() => {
         setXCooefficient(coefficient.a)
         setYCooefficient(coefficient.b)
@@ -35,45 +35,24 @@ const GraphInfo = (props) => {
         setIsVisible({ plane: !props.hidePlanes && plane.visibility.plane, normal: !props.hideNormals && plane.visibility.normal })
     }, [props.plane])
 
-    const tempStyling = {
-        planeInfoContainer: {
-            margin: props.idx === 0 ? "0 0 1rem 0" : "1rem 0"
-        },
-        planeHeading: {
-            fontSize: "1.5rem"
-        },
-        planeEquation: {
-            fontSize: "1.2rem",
-            fontWeight: 600
-        },
-        btn: {
-            color: "white",
-            padding: "10px 15px",
-            border: "none",
-            borderRadius: "0.8rem",
-            cursor: "pointer"
-        },
-        delBtn: {
-            backgroundColor: "red"
-        },
-        flex: {
-            display: "flex",
-            flexWrap: "wrap",
-            alignItems: "center",
-            justifyContent: "space-between"
-        },
-        eyeIcon: {
-            display: "flex",
-            width: "40%",
-            justifyContent: "space-between",
-        }
-    }
-
     return (
-        <div id="plane-info" style={tempStyling.planeInfoContainer}>
-            <div style={{ ...tempStyling.flex, width: "60%" }}>
-                <h3 style={tempStyling.planeHeading}>Plane {props.idx + 1}</h3>
-                <div style={tempStyling.eyeIcon}>
+        <div id="plane-info" className='planeInfoContainer'>
+            <div className='planeControlls'>
+                <div className="planeColorInput">
+                    <input
+                        title={hexToRGB(colour)}
+                        type="color"
+                        value={colour}
+                        className='planeColorInput'
+                        onChange={e => setColour(e.target.value)}
+                    />
+                </div>
+                <div className='planeHeading'>
+                    <p>
+                        Plane {props.idx + 1}
+                    </p>
+                </div>
+                <div className='eyeIcon'>
                     <FontAwesomeIcon
                         title='toggle plane visibility'
                         onClick={() => { setIsVisible({ plane: !isVisible.plane, normal: isVisible.normal }) }}
@@ -88,52 +67,44 @@ const GraphInfo = (props) => {
                     />
                 </div>
             </div>
-            <input
-                title={hexToRGB(colour)}
-                type="color"
-                value={colour}
-                onChange={e => setColour(e.target.value)}
-            />
-            <div>
-                <label htmlFor="x-cooefficient">
-                    x-cooefficient:
-                </label>
+            <div className='planeValuesInputs'>
+                <p>Equation: </p>
                 <input
                     name='x-cooefficient'
                     type="number"
                     value={xCooefficient}
                     onChange={e => setXCooefficient(parseFloat(e.target.value ? e.target.value : 0))}
                 />
-
-                <br />
-
-                <label htmlFor="y-cooefficient">
-                    y-cooefficient:
+                <label htmlFor="x-cooefficient">
+                    x
                 </label>
+
+                <span>+</span>
+
                 <input
                     name='y-cooefficient'
                     type="number"
                     value={yCooefficient}
                     onChange={e => setYCooefficient(parseFloat(e.target.value ? e.target.value : 0))}
                 />
-
-                <br />
-
-                <label htmlFor="z-cooefficient">
-                    z-cooefficient:
+                <label htmlFor="y-cooefficient">
+                    y
                 </label>
+
+                <span>+</span>
+
                 <input
                     name='z-cooefficient'
                     type="number"
                     value={zCooefficient}
                     onChange={e => setZCooefficient(parseFloat(e.target.value ? e.target.value : 0))}
                 />
-
-                <br />
-
-                <label htmlFor="constant">
-                    Constant:
+                <label htmlFor="z-cooefficient">
+                    z
                 </label>
+
+                <span>=</span>
+
                 <input
                     name='constant'
                     type="number"
@@ -142,23 +113,14 @@ const GraphInfo = (props) => {
                 />
             </div>
 
-            <span>Equation:</span>
-            <span style={tempStyling.planeEquation}>{xCooefficient}x + {yCooefficient}y + {zCooefficient}z = {constant}</span>
 
-            <span>
-                <h4>Coefficients:</h4>
-                <p>a: {coefficient.a}</p>
-                <p>b: {coefficient.b}</p>
-                <p>c: {coefficient.c}</p>
-                <p>d: {coefficient.d}</p>
-            </span>
-
-            <button
-                style={{ ...tempStyling.btn, ...tempStyling.delBtn }}
-                onClick={() => props.handleDeletePlane(props.idx)}
-            >
-                Delete
-            </button>
+            <div className="del-btn">
+                <FontAwesomeIcon
+                    icon={faTrash}
+                    title='delete plane'
+                    onClick={() => props.handleDeletePlane(props.idx)}
+                />
+            </div>
         </div>
     )
 }

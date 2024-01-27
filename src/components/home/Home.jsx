@@ -5,13 +5,7 @@ import SidePanel from './Side/SidePanel';
 
 import Plane from './Graph/Plane';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
-
-import listenForOutsideClicks from '../../utils/listenForOutsideClicks';
-
 import './../../stylesheets/home.css';
-import Tutorial from './tutorial/Tutorial';
 
 const Home = () => {
 	const userSettings = JSON.parse(localStorage.getItem('user-settings'))
@@ -28,17 +22,8 @@ const Home = () => {
 			[]
 	);
 
-	// A pop carousel tutorial shows click any where outside or press escape to close it
-	const [tutorialActive, setTutorialActive] = useState(!planes?.length);
-	const [listening, setListening] = useState(false);
-
-	const tutorialRef = useRef(null);
-	const buttonRef = useRef(null);
-
-	useEffect(listenForOutsideClicks(() => listening, setListening, tutorialRef, buttonRef, tutorialActive, setTutorialActive), []);
-	
-	// const panelRef = useRef(null);
-	// const panelButtonRef = useRef(null);
+	const panelRef = useRef(null);
+	const panelButtonRef = useRef(null);
 	// useEffect(listenForOutsideClicks(listening, setListening, panelRef, panelButtonRef, panelVisible, setPanelVisible));
 
 	useEffect(() => {
@@ -66,17 +51,6 @@ const Home = () => {
 
 	return (
 		<div id='home'>
-			<FontAwesomeIcon id='tutorial-bttn' onClick={() => setTutorialActive(true)} icon={faQuestionCircle} title='See Tutorial' ref={buttonRef} />
-
-			{
-				tutorialActive &&
-				<div className="grey-BG"></div>
-			}
-
-			<div id="tutorialWrapper" className={!tutorialActive ? "hidden" : ""} ref={tutorialRef}>
-				<Tutorial tutorialActive={tutorialActive} setTutorialActive={setTutorialActive} />
-			</div>
-
 			<SidePanel planes={planes} setPlanes={setPlanes} panelVisible={panelVisible} setPanelVisible={setPanelVisible} panelRef={panelRef} panelButtonRef={panelButtonRef} />
 			<GraphArea planes={planes} panelVisible={panelVisible} />
 		</div>

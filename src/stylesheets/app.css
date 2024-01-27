@@ -24,6 +24,10 @@ a {
     font-style: italic;
 }
 
+p {
+    margin: 0 !important;
+}
+
 main {
     display: flex;
     flex-grow: 1;
@@ -34,13 +38,6 @@ main {
 }
 
 /* utility classes */
-
-.flex {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .hidden,
 .hidden>* {
     display: none !important;
@@ -99,5 +96,29 @@ main {
 
     background-color: rgba(33, 27, 27, 0.579);
 
-    z-index: 5;
+    z-index: 10;
+}
+
+.app-title {
+    height: 4rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    
+    gap: 1rem;
+}
+
+.app-title .app-logo {
+    width: 3rem;
+}
+
+.app-title p {
+    font-size: 2rem;
+}
+
+.app-title .app-logo img {
+    width: 100%;
+    object-fit: cover;
 }
