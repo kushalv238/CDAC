@@ -44,6 +44,8 @@
 #plot {
     width: 99% !important;
     height: calc(100% - 5rem) !important;
+
+    cursor: move;
 }
 
 .instruction {

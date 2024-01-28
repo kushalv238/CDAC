@@ -1,6 +1,6 @@
 import { Routes as Switch, Route } from 'react-router-dom';
 
-import { Header, Home, Quiz, Footer } from './components'
+import { Header, Home, Quiz } from './components'
 import './stylesheets/app.css';
 import { useEffect, useRef, useState } from 'react';
 import listenForOutsideClicks from './utils/listenForOutsideClicks';
@@ -12,21 +12,25 @@ const App = () => {
 	const [listening, setListening] = useState(false);
 
 	const tutorialRef = useRef(null);
-	const buttonRef = useRef(null);
+	const tutorialButtonRef = useRef(null);
 
-	useEffect(listenForOutsideClicks(listening, setListening, tutorialRef, buttonRef, tutorialActive, setTutorialActive), []);
+	useEffect(() => {
+		const cleanupFunction = listenForOutsideClicks(listening, setListening, tutorialRef, tutorialButtonRef, tutorialActive, setTutorialActive, 84);
+		return cleanupFunction;
+	}, [listening, tutorialRef, tutorialButtonRef, tutorialActive, setTutorialActive]);
 
 	return (
 		<>
 			{
-				tutorialActive &&
-				<div className="grey-BG"></div>
+				(tutorialActive)
+					? <div className="grey-BG"></div>
+					: <></>
 			}
 			<div id="tutorialWrapper" className={!tutorialActive ? "hidden" : ""} ref={tutorialRef}>
 				<Tutorial tutorialActive={tutorialActive} setTutorialActive={setTutorialActive} />
 			</div>
 
-			<Header buttonRef={buttonRef} setTutorialActive={setTutorialActive} />
+			<Header tutorialButtonRef={tutorialButtonRef} setTutorialActive={setTutorialActive} />
 
 			<main>
 				<Switch>
@@ -34,7 +38,6 @@ const App = () => {
 					<Route exact path='/quiz' Component={Quiz} />
 				</Switch>
 			</main>
-			{/* <Footer /> */}
 		</>
 	)
 }

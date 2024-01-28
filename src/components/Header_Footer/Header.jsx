@@ -9,13 +9,14 @@ const Header = (props) => {
 		<header>
 			<div className="app-title">
 				<div className="app-logo">
-					<img src={appLogo} />
+					<img src={appLogo} alt='App Logo' title='AppName' />
 				</div>
 				<p>
 					AppName
 				</p>
 			</div>
-			<FontAwesomeIcon id='tutorial-bttn' onClick={() => props.setTutorialActive(true)} icon={faQuestionCircle} title='See Tutorial' ref={props.buttonRef} />
+
+			<FontAwesomeIcon id='tutorial-bttn' onClick={() => props.setTutorialActive(true)} icon={faQuestionCircle} title='See Tutorial' ref={props.tutorialButtonRef} />
 		</header>
 	)
 }

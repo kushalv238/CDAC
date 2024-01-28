@@ -1,9 +1,6 @@
 import {
-    calculateCrossProduct,
     calculateZArbitary,
-    calculatePlaneIntersection,
     calculateAngle,
-    calculateAllAngles,
 } from './graphUtilityFunctions'
 
 //                      x  y  z  reference points

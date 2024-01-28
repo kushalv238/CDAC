@@ -12,6 +12,11 @@ const Home = () => {
 
 	const [panelVisible, setPanelVisible] = useState(userSettings ? userSettings.panelVisible : true)
 
+	const [angleAvailable, setAngleAvailable] = useState(false);
+
+	const [calcAnglesPopUpActive, setCalcAnglesPopUpActive] = useState(false);
+	const anglesPopUpBttnRef = useRef(null);
+
 	const [planes, setPlanes] = useState(
 		localStorage.getItem('planes')
 			?
@@ -47,12 +52,12 @@ const Home = () => {
 		newSetting.panelVisible = panelVisible
 
 		localStorage.setItem('user-settings', JSON.stringify(newSetting))
-	}, [panelVisible])
+	}, [panelVisible, userSettings])
 
 	return (
 		<div id='home'>
-			<SidePanel planes={planes} setPlanes={setPlanes} panelVisible={panelVisible} setPanelVisible={setPanelVisible} panelRef={panelRef} panelButtonRef={panelButtonRef} />
-			<GraphArea planes={planes} panelVisible={panelVisible} />
+			<SidePanel planes={planes} setPlanes={setPlanes} panelVisible={panelVisible} setPanelVisible={setPanelVisible} panelRef={panelRef} panelButtonRef={panelButtonRef} setCalcAnglesPopUpActive={setCalcAnglesPopUpActive} anglesPopUpBttnRef={anglesPopUpBttnRef} angleAvailable={angleAvailable} />
+			<GraphArea planes={planes} panelVisible={panelVisible} calcAnglesPopUpActive={calcAnglesPopUpActive} setCalcAnglesPopUpActive={setCalcAnglesPopUpActive} anglesPopUpBttnRef={anglesPopUpBttnRef} setAngleAvailable={setAngleAvailable} angleAvailable={angleAvailable} />
 		</div>
 	)
 }

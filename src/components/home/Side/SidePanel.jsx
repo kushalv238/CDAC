@@ -4,13 +4,13 @@ import GraphInfo from './GraphInfo';
 import Plane from '../Graph/Plane';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faX } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faClose } from '@fortawesome/free-solid-svg-icons';
 
 import './../../../stylesheets/sidepanel.css'
 
 import appLogo from './../../../resources/images/favicon.jpg'
 
-const SidePanel = ({ planes, setPlanes, panelVisible, setPanelVisible, panelRef, panelButtonRef }) => {
+const SidePanel = ({ planes, setPlanes, panelVisible, setPanelVisible, panelRef, panelButtonRef, setCalcAnglesPopUpActive, anglesPopUpBttnRef, angleAvailable }) => {
 	const [instructionClicked, setInstructionClicked] = useState(planes?.length ? true : false);
 	const [hidePlanes, setHidePlanes] = useState(false);
 	const [hideNormals, setHideNormals] = useState(false);
@@ -53,7 +53,7 @@ const SidePanel = ({ planes, setPlanes, panelVisible, setPanelVisible, panelRef,
 				onClick={() => setPanelVisible(prev => !prev)}
 				ref={panelButtonRef}
 			>
-				<FontAwesomeIcon icon={panelVisible ? faX : faBars} />
+				<FontAwesomeIcon icon={panelVisible ? faClose : faBars} />
 			</div>
 
 			<div className="app-title">
@@ -91,19 +91,11 @@ const SidePanel = ({ planes, setPlanes, panelVisible, setPanelVisible, panelRef,
 					: <></>
 			}
 
-			<div className='flex justify-content-start gap-3' id='add-plane-bttn-wrapper'>
+			<div id='plane-bttns-wrapper'>
 				<button
 					onClick={handleAddPlane}
-					id='add-plane-bttn'
+					className='add-plane-bttn'
 					title='Add a plane'
-					style={{
-						color: "white",
-						padding: "10px 15px",
-						border: "none",
-						borderRadius: "0.8rem",
-						backgroundColor: "green",
-						cursor: "pointer"
-					}}
 				>Add Plane</button>
 				{
 					!instructionClicked &&
@@ -114,6 +106,14 @@ const SidePanel = ({ planes, setPlanes, panelVisible, setPanelVisible, panelRef,
 						</div>
 					</div>
 				}
+
+				<button
+					disabled={!angleAvailable}
+					ref={anglesPopUpBttnRef}
+					onClick={() => setCalcAnglesPopUpActive(true)}
+					className='show-angles-bttn'
+					title='Calculate Angles'
+				>Calculate Angles</button>
 			</div>
 		</div>
 	);

@@ -24,6 +24,11 @@ a {
     font-style: italic;
 }
 
+button:disabled {
+    background: rgb(171, 171, 171);
+    cursor: not-allowed;
+}
+
 p {
     margin: 0 !important;
 }

@@ -7,7 +7,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const GraphInfo = (props) => {
-    const plane = props.plane
+    const { plane } = props
+    const { handleInputChange, idx, hidePlanes, hideNormals } = props
+
     const coefficient = plane.coordinates;
 
     //Get and set plane properties
@@ -16,15 +18,15 @@ const GraphInfo = (props) => {
     const [zCooefficient, setZCooefficient] = useState(coefficient.c);
     const [constant, setConstant] = useState(coefficient.d);
     const [colour, setColour] = useState(rgbToHex(plane.colour.colour));
-    const [isVisible, setIsVisible] = useState({ plane: !props.hidePlanes && plane.visibility.plane, normal: !props.hideNormals && plane.visibility.normal })
+    const [isVisible, setIsVisible] = useState({ plane: !hidePlanes && plane.visibility.plane, normal: !hideNormals && plane.visibility.normal })
 
     useEffect(() => {
-        props.handleInputChange(props.idx, { a: xCooefficient, b: yCooefficient, c: zCooefficient, d: constant }, hexToRGB(colour), isVisible);
-    }, [xCooefficient, yCooefficient, zCooefficient, constant, colour, isVisible])
+        handleInputChange(idx, { a: xCooefficient, b: yCooefficient, c: zCooefficient, d: constant }, hexToRGB(colour), isVisible);
+    }, [idx, xCooefficient, yCooefficient, zCooefficient, constant, colour, isVisible])
 
     useEffect(() => {
-        setIsVisible({ plane: !props.hidePlanes, normal: !props.hideNormals })
-    }, [props.hidePlanes, props.hideNormals])
+        setIsVisible({ plane: !hidePlanes, normal: !hideNormals })
+    }, [hidePlanes, hideNormals])
 
     useEffect(() => {
         setXCooefficient(coefficient.a)
@@ -32,8 +34,8 @@ const GraphInfo = (props) => {
         setZCooefficient(coefficient.c)
         setConstant(coefficient.d)
         setColour(rgbToHex(plane.colour.colour))
-        setIsVisible({ plane: !props.hidePlanes && plane.visibility.plane, normal: !props.hideNormals && plane.visibility.normal })
-    }, [props.plane])
+        setIsVisible({ plane: !hidePlanes && plane.visibility.plane, normal: !hideNormals && plane.visibility.normal })
+    }, [plane])
 
     return (
         <div id="plane-info" className='planeInfoContainer'>
