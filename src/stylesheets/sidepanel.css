@@ -96,13 +96,17 @@
     /* gap: 1rem; */
 }
 
-.add-plane-bttn {
+.add-plane-bttn button {
     color: white;
     padding: 10px 15px;
     border: none;
     border-radius: 0.8rem;
     background-color: green;
-    cursor: pointer
+    cursor: pointer;
+}
+
+.add-plane-bttn {
+    position: relative;
 }
 
 .show-angles-bttn {
@@ -111,7 +115,36 @@
     border: none;
     border-radius: 0.8rem;
     background-color: rgb(89, 159, 220);
+
     cursor: pointer
+}
+
+.instruction {
+    position: absolute;
+    top: 0;
+    text-align: center;
+    width: 10rem;
+
+    background-color: dodgerblue;
+    color: white;
+
+    transform: translateY(-3rem);
+}
+
+.instruction p {
+    margin: 4px 0 !important;
+}
+
+.triangle-bottom {
+    width: 0;
+    height: 0;
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+
+    border-top: 25px solid dodgerblue;
+
+    position: absolute;
+    left: 0;
 }
 
 #graph-details-wrapper {

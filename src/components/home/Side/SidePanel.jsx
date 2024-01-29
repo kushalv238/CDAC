@@ -92,20 +92,20 @@ const SidePanel = ({ planes, setPlanes, panelVisible, setPanelVisible, panelRef,
 			}
 
 			<div id='plane-bttns-wrapper'>
-				<button
+				<div
 					onClick={handleAddPlane}
 					className='add-plane-bttn'
 					title='Add a plane'
-				>Add Plane</button>
-				{
-					!instructionClicked &&
-					<div className="instruction">
-						<div className="triangle-left"></div>
-						<div className="instruction-text">
-							Click to add a plane
+				>
+					<button>Add Plane</button>
+					{
+						!instructionClicked &&
+						<div className="instruction">
+							<p>Click to add a plane</p>
+							<div className="triangle-bottom"></div>
 						</div>
-					</div>
-				}
+					}
+				</div>
 
 				<button
 					disabled={!angleAvailable}

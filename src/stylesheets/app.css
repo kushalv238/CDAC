@@ -52,24 +52,6 @@ main {
     display: none;
 }
 
-.triangle-left {
-    width: 0;
-    height: 0;
-    border-top: 25px solid transparent;
-    border-bottom: 25px solid transparent;
-
-    border-right: 25px solid dodgerblue;
-}
-
-.triangle-right {
-    width: 0;
-    height: 0;
-    border-top: 25px solid transparent;
-    border-bottom: 25px solid transparent;
-
-    border-left: 25px solid dodgerblue;
-}
-
 .closeButton,
 .playPauseButton {
     position: absolute;
