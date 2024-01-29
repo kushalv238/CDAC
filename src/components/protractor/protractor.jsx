@@ -1,8 +1,8 @@
 import './protractor.css'
 
-const Protractor = () => {
+const Protractor = (props) => {
     return (
-        <div id="pro">
+        <div id="protractor" ref={props.refernce} title='scroll to rotate'>
             <div className="line"><p>180</p></div>
             <div className="line"><p>170</p></div>
             <div className="line"><p>160</p></div>

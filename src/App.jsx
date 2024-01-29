@@ -1,15 +1,24 @@
 import { Routes as Switch, Route } from 'react-router-dom';
 
 import { Header, Home, Quiz } from './components'
+
 import './stylesheets/app.css';
+
 import { useEffect, useRef, useState } from 'react';
+
 import listenForOutsideClicks from './utils/listenForOutsideClicks';
+
 import Tutorial from './components/home/tutorial/Tutorial';
+import Protractor from './components/protractor/protractor';
+
+import DraggableComponent from './utils/DraggableComponent'
 
 const App = () => {
 	// A pop carousel tutorial shows click any where outside or press escape to close it
 	const [tutorialActive, setTutorialActive] = useState(!localStorage.getItem('planes')?.length);
 	const [listening, setListening] = useState(false);
+
+	const [draggableComponentisMounted, setDraggableComponentIsMounted] = useState(false);
 
 	const tutorialRef = useRef(null);
 	const tutorialButtonRef = useRef(null);
@@ -21,6 +30,11 @@ const App = () => {
 
 	return (
 		<>
+		{
+			draggableComponentisMounted &&
+				<DraggableComponent children={<Protractor />} />
+		}
+
 			{
 				(tutorialActive)
 					? <div className="grey-BG"></div>
@@ -30,7 +44,7 @@ const App = () => {
 				<Tutorial tutorialActive={tutorialActive} setTutorialActive={setTutorialActive} />
 			</div>
 
-			<Header tutorialButtonRef={tutorialButtonRef} setTutorialActive={setTutorialActive} />
+			<Header tutorialButtonRef={tutorialButtonRef} setTutorialActive={setTutorialActive} draggableComponentisMounted={draggableComponentisMounted} setDraggableComponentIsMounted={setDraggableComponentIsMounted} />
 
 			<main>
 				<Switch>

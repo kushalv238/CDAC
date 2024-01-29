@@ -17,6 +17,7 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.8.0",
     "react-dom": "^18.2.0",
+    "react-draggable": "^4.4.6",
     "react-hot-toast": "^2.4.1",
     "react-mathjax2": "^0.0.2",
     "react-mathquill": "^1.0.3",

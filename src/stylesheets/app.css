@@ -15,6 +15,7 @@
 
 html {
     box-sizing: border-box;
+    overflow: hidden;
 }
 
 a {
@@ -93,7 +94,7 @@ main {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    
+
     gap: 1rem;
 }
 
@@ -108,4 +109,13 @@ main {
 .app-title .app-logo img {
     width: 100%;
     object-fit: cover;
+}
+
+.draggable-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    cursor: grab;
+
+    z-index: 8;
 }

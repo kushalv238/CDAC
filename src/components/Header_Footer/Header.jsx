@@ -1,4 +1,4 @@
-import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import './../../stylesheets/header.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -16,7 +16,11 @@ const Header = (props) => {
 				</p>
 			</div>
 
-			<FontAwesomeIcon id='tutorial-bttn' onClick={() => props.setTutorialActive(true)} icon={faQuestionCircle} title='See Tutorial' ref={props.tutorialButtonRef} />
+			<div id="tutorial-bttn">
+				<FontAwesomeIcon icon={faMagnifyingGlass} onClick={() => props.setDraggableComponentIsMounted((prev) => !prev)} title='toggle protractor' />
+				<FontAwesomeIcon onClick={() => props.setTutorialActive(true)} icon={faQuestionCircle} title='See Tutorial' ref={props.tutorialButtonRef} />
+			</div>
+
 		</header>
 	)
 }
