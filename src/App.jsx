@@ -11,7 +11,8 @@ import listenForOutsideClicks from './utils/listenForOutsideClicks';
 import Tutorial from './components/home/tutorial/Tutorial';
 import Protractor from './components/protractor/protractor';
 
-import DraggableComponent from './utils/DraggableComponent'
+import DraggableComponent from './components/utils/DraggableComponent'
+import toast from 'react-hot-toast';
 
 const App = () => {
 	// A pop carousel tutorial shows click any where outside or press escape to close it
@@ -24,16 +25,22 @@ const App = () => {
 	const tutorialButtonRef = useRef(null);
 
 	useEffect(() => {
+		if(draggableComponentisMounted) {
+			toast('Drag the protractor to move.\nScroll over it to rotate.', {icon: 'ℹ️', duration: 6000})
+		}
+	}, [draggableComponentisMounted])
+
+	useEffect(() => {
 		const cleanupFunction = listenForOutsideClicks(listening, setListening, tutorialRef, tutorialButtonRef, tutorialActive, setTutorialActive, 84);
 		return cleanupFunction;
 	}, [listening, tutorialRef, tutorialButtonRef, tutorialActive, setTutorialActive]);
 
 	return (
 		<>
-		{
-			draggableComponentisMounted &&
+			{
+				draggableComponentisMounted &&
 				<DraggableComponent children={<Protractor />} />
-		}
+			}
 
 			{
 				(tutorialActive)

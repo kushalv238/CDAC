@@ -23,7 +23,7 @@ const CalculateAngles = (props) => {
             return;
         }
 
-        // an error of 0.5 is allowed
+        // allowing an an error of 0.5
         if (Math.abs(parseFloat(angleInput).toFixed(4) - (angles[0].angle / Math.PI * 180).toFixed(4)) <= 0.5) {
             toast.success("Correct!")
         } else {
