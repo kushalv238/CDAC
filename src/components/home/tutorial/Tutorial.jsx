@@ -9,17 +9,54 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPause, faPlay, faX } from '@fortawesome/free-solid-svg-icons';
 
 const Tutorial = (props) => {
-    const [index, setIndex] = useState(0);
-    const [isSliding, setIsSliding] = useState(true);
 
-    useEffect(() => {
-        setIndex(0)
-        setIsSliding(true)
-    }, [props.tutorialActive])
+    const [currentStep, setCurrentStep] = useState(0);
+
+  // Define your tutorial steps
+  const steps = [
+    {
+      text: "Step 1: Click the 'Add Plane' button.",
+      highlights: ["add-plane-button"]
+    },
+    {
+      text: "Step 2: View plane information.",
+      highlights: ["plane-info"]
+    },
+    // Add more steps as needed
+  ];
+
+  const handleNextStep = () => {
+    if (currentStep < steps.length - 1) {
+      setCurrentStep(currentStep + 1);
+    } else {
+      // End of tutorial, close tutorial overlay or navigate to main page
+    }
+  };
+
+
+    // const [index, setIndex] = useState(0);
+    // const [isSliding, setIsSliding] = useState(true);
+    
+    // useEffect(() => {
+    //     setIndex(0)
+    //     setIsSliding(true)
+    // }, [props.tutorialActive])
 
     return (
         <>
-            <Carousel
+        <div>
+      <div className="tutorial-overlay">
+        {/* Render overlays for the current step */}
+        {steps[currentStep].highlights.map((highlight, index) => (
+          <div key={index} className={`highlight-overlay ${highlight}`} />
+        ))}
+        {/* Render tutorial text */}
+        <div className="tutorial-text">{steps[currentStep].text}</div>
+        {/* Render Next button */}
+        <button onClick={handleNextStep}>Next</button>
+      </div>
+    </div>
+            {/* <Carousel
                 activeIndex={index}
                 onSelect={(idx) => setIndex(idx)}
                 interval={isSliding ? 5000 : null}
@@ -66,7 +103,7 @@ const Tutorial = (props) => {
                 <FontAwesomeIcon icon={isSliding ? faPause : faPlay} />
             </div>
 
-            <p id='tut-caption'>Press 't' to see this tutorial agin</p>
+            <p id='tut-caption'>Press 't' to see this tutorial agin</p> */}
 
         </>
     );

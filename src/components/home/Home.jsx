@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 
 import GraphArea from './Graph/GraphArea';
 import SidePanel from './Side/SidePanel';
-
+import Tutorial from './tutorial/Tutorial';
 import Plane from './Graph/Plane';
 
 import './../../stylesheets/home.css';
@@ -11,6 +11,7 @@ const Home = () => {
 	const userSettings = JSON.parse(localStorage.getItem('user-settings'))
 
 	const [panelVisible, setPanelVisible] = useState(userSettings ? userSettings.panelVisible : true)
+	const[tutorialActive,setTutorialActive]=useState(true)
 
 	const [angleAvailable, setAngleAvailable] = useState(false);
 
@@ -56,6 +57,7 @@ const Home = () => {
 
 	return (
 		<div id='home'>
+			<Tutorial></Tutorial>
 			<SidePanel planes={planes} setPlanes={setPlanes} panelVisible={panelVisible} setPanelVisible={setPanelVisible} panelRef={panelRef} panelButtonRef={panelButtonRef} setCalcAnglesPopUpActive={setCalcAnglesPopUpActive} anglesPopUpBttnRef={anglesPopUpBttnRef} angleAvailable={angleAvailable} />
 			<GraphArea planes={planes} panelVisible={panelVisible} calcAnglesPopUpActive={calcAnglesPopUpActive} setCalcAnglesPopUpActive={setCalcAnglesPopUpActive} anglesPopUpBttnRef={anglesPopUpBttnRef} setAngleAvailable={setAngleAvailable} angleAvailable={angleAvailable} />
 		</div>
