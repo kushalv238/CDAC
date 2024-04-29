@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 
 import GraphInfo from './GraphInfo';
 import Plane from '../Graph/Plane';
@@ -14,7 +14,7 @@ const SidePanel = ({ planes, setPlanes, panelVisible, setPanelVisible, panelRef,
 	const [instructionClicked, setInstructionClicked] = useState(planes?.length ? true : false);
 	const [hidePlanes, setHidePlanes] = useState(false);
 	const [hideNormals, setHideNormals] = useState(false);
-
+	
 	const handleAddPlane = () => {
 		setPlanes([...planes, new Plane([0, 0, 0, 0])]);
 
@@ -93,18 +93,20 @@ const SidePanel = ({ planes, setPlanes, panelVisible, setPanelVisible, panelRef,
 
 			<div id='plane-bttns-wrapper'>
 				<div
+					
 					onClick={handleAddPlane}
 					className='add-plane-bttn'
 					title='Add a plane'
+					id='add-plane-bttn'
 				>
 					<button>Add Plane</button>
-					{
+					{/* {
 						!instructionClicked &&
 						<div className="instruction">
 							<p>Click to add a plane</p>
 							<div className="triangle-bottom"></div>
 						</div>
-					}
+					} */}
 				</div>
 
 				<button

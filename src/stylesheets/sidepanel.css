@@ -333,3 +333,20 @@
         width: 80%;
     }
 }
+
+#overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
+    z-index: 1000; /* Ensure overlay is on top of other elements */
+    /* display: none; Initially hidden */
+    /* pointer-events: none; */
+}
+
+.highlight{
+    position:relative;
+    z-index: 2000;
+}
