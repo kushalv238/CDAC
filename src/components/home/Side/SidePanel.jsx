@@ -1,4 +1,4 @@
-import { useState,useEffect } from 'react';
+import { useState } from 'react';
 
 import GraphInfo from './GraphInfo';
 import Plane from '../Graph/Plane';
@@ -9,23 +9,19 @@ import { faBars, faClose } from '@fortawesome/free-solid-svg-icons';
 import './../../../stylesheets/sidepanel.css'
 
 import appLogo from './../../../resources/images/favicon.jpg'
+import Tutorial from '../tutorial/Tutorial';
 
-const SidePanel = ({ planes, setPlanes, panelVisible, setPanelVisible, panelRef, panelButtonRef, setCalcAnglesPopUpActive, anglesPopUpBttnRef, angleAvailable }) => {
-	const [instructionClicked, setInstructionClicked] = useState(planes?.length ? true : false);
+const SidePanel = ({ planes, setPlanes, panelVisible, setPanelVisible, panelRef, panelButtonRef, setCalcAnglesPopUpActive, anglesPopUpBttnRef, angleAvailable, tutorialShown, setTutorialShown, setDraggableComponentIsMounted }) => {
 	const [hidePlanes, setHidePlanes] = useState(false);
 	const [hideNormals, setHideNormals] = useState(false);
 	
 	const handleAddPlane = () => {
 		setPlanes([...planes, new Plane([0, 0, 0, 0])]);
-
-		setInstructionClicked(true);
 	};
 
 	const handleDeletePlane = (planeIndex) => {
 		const updatedPlanes = planes.filter((_, index) => index !== planeIndex);
 		setPlanes(updatedPlanes);
-
-		setInstructionClicked(updatedPlanes?.length ? true : false);
 	};
 
 	const handleInputChange = (planeIndex, coordinates, colour, visibility) => {
@@ -45,8 +41,13 @@ const SidePanel = ({ planes, setPlanes, panelVisible, setPanelVisible, panelRef,
 	// }, [planes])
 
 	return (
-
 		<div id="side-panel" className={`${!panelVisible ? 'side-panel-small' : ''}`} ref={panelRef}>
+			{
+				!tutorialShown 
+				? <Tutorial setTutorialShown={setTutorialShown} />
+				: <></>
+			}
+
 			<div
 				id="panel-toggle-btn"
 				title={panelVisible ? 'hide panel' : 'show panel'}
@@ -58,10 +59,10 @@ const SidePanel = ({ planes, setPlanes, panelVisible, setPanelVisible, panelRef,
 
 			<div className="app-title">
 				<div className="app-logo">
-					<img src={appLogo} alt='App Logo' title='AppName' />
+					<img src={appLogo} alt='App Logo' title='ZenithAngles' />
 				</div>
 				<p>
-					AppName
+					ZenithAngles
 				</p>
 			</div>
 
@@ -92,28 +93,26 @@ const SidePanel = ({ planes, setPlanes, panelVisible, setPanelVisible, panelRef,
 			}
 
 			<div id='plane-bttns-wrapper'>
-				<div
+				<button
 					
 					onClick={handleAddPlane}
-					className='add-plane-bttn'
 					title='Add a plane'
 					id='add-plane-bttn'
 				>
-					<button>Add Plane</button>
-					{/* {
-						!instructionClicked &&
-						<div className="instruction">
-							<p>Click to add a plane</p>
-							<div className="triangle-bottom"></div>
-						</div>
-					} */}
-				</div>
+					Add Plane
+				</button>
+
+				<button
+					onClick={() => setDraggableComponentIsMounted(prev => !prev)}
+					id='toggle-protractor-bttn'
+					title='toggle protractor'
+				>Toggle Protractor</button>
 
 				<button
 					disabled={!angleAvailable}
 					ref={anglesPopUpBttnRef}
 					onClick={() => setCalcAnglesPopUpActive(true)}
-					className='show-angles-bttn'
+					id='test-angle-bttn'
 					title='Calculate Angles'
 				>Calculate Angles</button>
 			</div>

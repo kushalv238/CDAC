@@ -3,7 +3,7 @@ import React from 'react'
 import Carousel from 'react-bootstrap/Carousel';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { quizImg, cutePup } from './../../../resources'
+import { quizImg, cutePup } from '../../resources'
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX } from '@fortawesome/free-solid-svg-icons';
@@ -23,8 +23,8 @@ const CalculateAngles = (props) => {
             return;
         }
 
-        // allowing an an error of 0.5
-        if (Math.abs(parseFloat(angleInput).toFixed(4) - (angles[0].angle / Math.PI * 180).toFixed(4)) <= 0.5) {
+        // allowing an an error of 2deg
+        if (Math.abs(parseFloat(angleInput).toFixed(4) - (angles[0].angle / Math.PI * 180).toFixed(4)) <= 2) {
             toast.success("Correct!")
         } else {
             toast.error("Wrong")

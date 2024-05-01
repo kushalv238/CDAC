@@ -2,14 +2,14 @@ import { useEffect, useRef, useState } from 'react';
 import Graph from './Graph';
 import createData from './createData';
 import listenForOutsideClicks from '../../../utils/listenForOutsideClicks';
-import CalculateAngles from '../tutorial/CalculateAngles';
+import CalculateAngles from '../../quiz/CalculateAngles';
 
 const GraphArea = (props) => {
 	const { data, angles } = createData(props.planes)
 
 	useEffect(() => {
 		props.setAngleAvailable(typeof angles[0]?.angle === 'number' && !isNaN(angles[0]?.angle))
-	}, [angles])
+	}, [angles, props])
 
 	const [listening, setListening] = useState(false)
 	const { calcAnglesPopUpActive, setCalcAnglesPopUpActive, anglesPopUpBttnRef } = props;

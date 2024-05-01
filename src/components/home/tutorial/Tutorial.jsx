@@ -1,112 +1,106 @@
-import React from 'react'
-
-import Carousel from 'react-bootstrap/Carousel';
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-import { plane3D, angleBetweenPlanes, cutePup } from './../../../resources'
 import { useState, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPause, faPlay, faX } from '@fortawesome/free-solid-svg-icons';
+import '../../../stylesheets/tutorial.css'
 
 const Tutorial = (props) => {
+	const [currentStep, setCurrentStep] = useState(0);
+	const [prevId, setPrevId] = useState([]);
 
-    const [currentStep, setCurrentStep] = useState(0);
+	// Define tutorial steps
+	const steps = [
+		{
+			message: "Click the 'Add Plane' button to add a plane",
+			highlightIds: ["add-plane-bttn"],
+			isStepReady: () => !!document.getElementById("add-plane-bttn")
+		},
+		{
+			message: "Add variables to the plane equation",
+			highlightIds: ["graph-details-wrapper"],
+			isStepReady: () => !!document.getElementById("graph-details-wrapper")
+		},
+		{
+			message: "Add another plane",
+			highlightIds: ["add-plane-bttn"],
+			isStepReady: () => !!document.getElementById("add-plane-bttn")
+		},
+		{
+			message: "Add variables to the plane equation",
+			highlightIds: ["graph-details-wrapper"],
+			isStepReady: () => {
+				const elem = document.getElementById("graph-details-wrapper");
+				return elem.getElementsByClassName("planeInfoContainer").length >= 2
+			}
+		},
+		{
+			message: "Play around with the planes and visualize it",
+			highlightIds: ["side-panel-options", "graph-details-wrapper", "plot"],
+			isStepReady: () => !!document.getElementById("plot")
+		},
+		{
+			message: "Click on the protractor icon to access protractor",
+			highlightIds: ["protractor-options", "toggle-protractor-bttn"],
+			isStepReady: () => !!document.getElementById("toggle-protractor-bttn") && !!document.getElementById("protractor-options")
+		},
+		{
+			message: "Using your mouse move protractor to measure the angle between the planes (scroll on the protractor to rotate it )",
+			highlightIds: ["plot", "protractor"],
+			isStepReady: () => !!document.getElementById("protractor") && !!document.getElementById("plot")
+		},
+		{
+			message: "Now take a quiz to check your answer!",
+			highlightIds: ["test-angle-bttn"],
+			isStepReady: () => !!document.getElementById("test-angle-bttn")
+		},
+	];
 
-  // Define your tutorial steps
-  const steps = [
-    {
-      text: "Step 1: Click the 'Add Plane' button.",
-      highlights: ["add-plane-button"]
-    },
-    {
-      text: "Step 2: View plane information.",
-      highlights: ["plane-info"]
-    },
-    // Add more steps as needed
-  ];
+	function handleTutorialStep(idx = 0) {
+		const classTrack = []
+		for (let i = 0; i < steps[idx]?.highlightIds.length; ++i) {
+			const elem = document.getElementById(steps[idx].highlightIds[i])
 
-  const handleNextStep = () => {
-    if (currentStep < steps.length - 1) {
-      setCurrentStep(currentStep + 1);
-    } else {
-      // End of tutorial, close tutorial overlay or navigate to main page
-    }
-  };
+			if (!!steps[idx].isStepReady && !(typeof steps[idx].isStepReady === 'function' && steps[idx].isStepReady())) {
+				console.log("Complete the previous step first")
+				return idx - 1;
+			}
 
+			if (!elem) {
+				console.log("Component to be highlighted is not mounted yet.")
+				return idx - 1
+			}
 
-    // const [index, setIndex] = useState(0);
-    // const [isSliding, setIsSliding] = useState(true);
-    
-    // useEffect(() => {
-    //     setIndex(0)
-    //     setIsSliding(true)
-    // }, [props.tutorialActive])
+			elem.classList.add('highlight')
+			classTrack.push(steps[idx].highlightIds[i])
+		}
 
-    return (
-        <>
-        <div>
-      <div className="tutorial-overlay">
-        {/* Render overlays for the current step */}
-        {steps[currentStep].highlights.map((highlight, index) => (
-          <div key={index} className={`highlight-overlay ${highlight}`} />
-        ))}
-        {/* Render tutorial text */}
-        <div className="tutorial-text">{steps[currentStep].text}</div>
-        {/* Render Next button */}
-        <button onClick={handleNextStep}>Next</button>
-      </div>
-    </div>
-            {/* <Carousel
-                activeIndex={index}
-                onSelect={(idx) => setIndex(idx)}
-                interval={isSliding ? 5000 : null}
-                pause={false}
-            >
-                <Carousel.Item>
-                    <img src={plane3D} alt="3D Plane" className='carouselImg' />
-                    <Carousel.Caption>
-                        <h3 className='text-success fw-bolder fs-3'>3D Plane</h3>
-                        <p className='text-muted fs-6 fw-bold'>A plane in 3D coordinate space is a flat surface that extends indefinitely containing a vector that is perpendicular to the plane called as the normal.</p>
-                    </Carousel.Caption>
-                </Carousel.Item>
-                <Carousel.Item>
-                    <img src={angleBetweenPlanes} alt="angle between planes" className='carouselImg' />
-                    <Carousel.Caption>
-                        <h3 className='text-success fw-bolder fs-3'>Angle Between Planes</h3>
-                        <p className='text-muted fs-6 fw-bold'>The angle between two planes is equal to the angle between their normals.</p>
-                    </Carousel.Caption>
-                </Carousel.Item>
-                <Carousel.Item>
-                    <img src={cutePup} alt="pup" className='carouselImg' />
-                    <Carousel.Caption>
-                        <h3>Third slide label</h3>
-                        <p>
-                            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-                        </p>
-                    </Carousel.Caption>
-                </Carousel.Item>
-            </Carousel>
+		prevId.map((id, _) => {
+			const elem = document.getElementById(id)
+			elem.classList.remove('highlight')
+		})
 
-            <div
-                className="closeButton flex"
-                onClick={() => props.setTutorialActive(false)}
-                title='Close'
-            >
-                <FontAwesomeIcon icon={faX} />
-            </div>
+		setPrevId(classTrack)
 
-            <div
-                className="playPauseButton flex"
-                onClick={() => setIsSliding(prev=>!prev)}
-                title={isSliding ? "Pause" : "Play"}
-            >
-                <FontAwesomeIcon icon={isSliding ? faPause : faPlay} />
-            </div>
+		return idx;
+	}
 
-            <p id='tut-caption'>Press 't' to see this tutorial agin</p> */}
+	useEffect(() => {
+		handleTutorialStep()
+		setCurrentStep(0)
+	}, [])
 
-        </>
-    );
+	if (currentStep === steps.length) {
+		localStorage.setItem('tutorial-shown', 'true')
+		return <></>
+	}
+
+	return (
+		<>
+			<div className="tutorial-overlay">
+				<div className="tutorial-text">
+					<div className="tutorial-message">{steps[currentStep]?.message}</div>
+					<button onClick={() => setCurrentStep(prev => handleTutorialStep(prev + 1))}>Next</button>
+				</div>
+			</div>
+		</>
+	);
 }
 
 export default Tutorial

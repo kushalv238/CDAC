@@ -38,7 +38,7 @@ const GraphInfo = (props) => {
     }, [plane])
 
     return (
-        <div id="plane-info" className='planeInfoContainer'>
+        <div className='planeInfoContainer'>
             <div className='planeControlls'>
                 <div className="planeColorInput">
                     <input

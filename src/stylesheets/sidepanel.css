@@ -75,10 +75,6 @@
     background-color: rgb(187, 187, 187) !important;
 }
 
-#plane-info input {
-    width: 3rem;
-}
-
 #plane-bttns-wrapper {
     position: absolute;
     bottom: 0;
@@ -96,7 +92,7 @@
     /* gap: 1rem; */
 }
 
-.add-plane-bttn button {
+#add-plane-bttn {
     color: white;
     padding: 10px 15px;
     border: none;
@@ -105,16 +101,22 @@
     cursor: pointer;
 }
 
-.add-plane-bttn {
-    position: relative;
-}
-
-.show-angles-bttn {
+#test-angle-bttn {
     color: white;
     padding: 10px 15px;
     border: none;
     border-radius: 0.8rem;
     background-color: rgb(89, 159, 220);
+
+    cursor: pointer
+}
+
+#toggle-protractor-bttn {
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 0.8rem;
+    background-color: rgb(54, 54, 54);
 
     cursor: pointer
 }
@@ -184,7 +186,13 @@
 
     padding: 10px 5px;
 
+    background-color: var(--clr-primary);
+
     /* max-height: 10rem; */
+}
+
+.planeInfoContainer input {
+    width: 3rem;
 }
 
 .planeColorInput {
@@ -332,21 +340,4 @@
     .planeControlls {
         width: 80%;
     }
-}
-
-#overlay{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
-    z-index: 1000; /* Ensure overlay is on top of other elements */
-    /* display: none; Initially hidden */
-    /* pointer-events: none; */
-}
-
-.highlight{
-    position:relative;
-    z-index: 2000;
 }

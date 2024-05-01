@@ -5,18 +5,6 @@
     width: 100%;
 }
 
-#tutorial-bttn {
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 1.5rem;
-
-    display: flex;
-    gap: 1rem;
-
-    cursor: pointer;
-}
-
 #graph-area {
     width: 75%;
     background-color: white;
@@ -48,7 +36,7 @@
     cursor: move;
 }
 
-#tutorialWrapper {
+#tutorialWrapper {  
     position: absolute;
     inset: 0;
 
@@ -59,7 +47,7 @@
 
     box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
 
-    z-index: 12;
+    z-index: 30;
 
     /* overflow: hidden !important; */
 }
