@@ -78,12 +78,12 @@ const Home = () => {
 	return (
 		<div id='home'>
 			<Header setDraggableComponentIsMounted={setDraggableComponentIsMounted} />
+			<SidePanel planes={planes} setPlanes={setPlanes} panelVisible={panelVisible} setPanelVisible={setPanelVisible} panelRef={panelRef} panelButtonRef={panelButtonRef} setCalcAnglesPopUpActive={setCalcAnglesPopUpActive} anglesPopUpBttnRef={anglesPopUpBttnRef} angleAvailable={angleAvailable} tutorialShown={tutorialShown} setTutorialShown={setTutorialShown} setDraggableComponentIsMounted={setDraggableComponentIsMounted} />
+			<GraphArea planes={planes} panelVisible={panelVisible} calcAnglesPopUpActive={calcAnglesPopUpActive} setCalcAnglesPopUpActive={setCalcAnglesPopUpActive} anglesPopUpBttnRef={anglesPopUpBttnRef} setAngleAvailable={setAngleAvailable} angleAvailable={angleAvailable} />
 			{
 				draggableComponentisMounted &&
 				<DraggableComponent children={<Protractor />} />
 			}
-			<SidePanel planes={planes} setPlanes={setPlanes} panelVisible={panelVisible} setPanelVisible={setPanelVisible} panelRef={panelRef} panelButtonRef={panelButtonRef} setCalcAnglesPopUpActive={setCalcAnglesPopUpActive} anglesPopUpBttnRef={anglesPopUpBttnRef} angleAvailable={angleAvailable} tutorialShown={tutorialShown} setTutorialShown={setTutorialShown} setDraggableComponentIsMounted={setDraggableComponentIsMounted} />
-			<GraphArea planes={planes} panelVisible={panelVisible} calcAnglesPopUpActive={calcAnglesPopUpActive} setCalcAnglesPopUpActive={setCalcAnglesPopUpActive} anglesPopUpBttnRef={anglesPopUpBttnRef} setAngleAvailable={setAngleAvailable} angleAvailable={angleAvailable} />
 		</div>
 	)
 }

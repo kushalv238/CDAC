@@ -3,7 +3,7 @@ import React from 'react'
 import Carousel from 'react-bootstrap/Carousel';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { quizImg, cutePup } from '../../resources'
+import { quizImg } from '../../resources'
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX } from '@fortawesome/free-solid-svg-icons';
@@ -70,13 +70,19 @@ const CalculateAngles = (props) => {
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
-                    <img src={cutePup} alt="pup" className='carouselImg' />
-                    <Carousel.Caption>
-                        <h3>Third slide label</h3>
-                        <p>
-                            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-                        </p>
-                    </Carousel.Caption>
+                    <div className='angle-calc-explained bg-light'>
+                        <div>
+                            <p>The angle 𝜃 between two planes, 𝑛<sub>1</sub> & 𝑛<sub>2</sub>, can then be calculated as:</p>
+                            <p className='angle-equation'><span>𝜃</span><span>&nbsp;=&nbsp;</span><span>cos<sup>-1</sup></span><span className='brac-font'>(</span><span className='division'><span className='text-center'>𝑛<sub>1</sub>⋅𝑛<sub>2</sub></span><span className='text-center'>||𝑛<sub>1</sub>||&nbsp;||𝑛<sub>2</sub>||</span></span><span className='brac-font'>)</span> </p>
+                            <p>
+                                <p>Where:</p>
+                                <ul>
+                                    <li>𝑛<sub>1</sub>⋅𝑛<sub>2</sub> is the dot product of the two normal vectors.</li>
+                                    <li><span className='text-center'>||𝑛<sub>1</sub>|| and ||𝑛<sub>2</sub>||</span> are the magnitudes of the normal vectors 𝑛<sub>1</sub> & 𝑛<sub>2</sub></li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
                 </Carousel.Item>
             </Carousel>
 

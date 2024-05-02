@@ -43,12 +43,6 @@ main {
     height: 4rem;
 }
 
-/* utility classes */
-.hidden,
-.hidden>* {
-    display: none !important;
-}
-
 .infolayer {
     display: none;
 }
@@ -118,4 +112,22 @@ main {
     cursor: grab;
 
     z-index: 20;
+}
+
+/* utility classes */
+.hidden,
+.hidden>* {
+    display: none !important;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.h-full {
+    height: 100%;
+}
+
+.text-center {
+    text-align: center;
 }
