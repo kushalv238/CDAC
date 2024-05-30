@@ -29,7 +29,6 @@ function createData(planes) {
                 [calculateZArbitary(a, b, c, d, x_arb[1][0], y_arb[1][0], referncePoints), calculateZArbitary(a, b, c, d, x_arb[1][1], y_arb[1][1], referncePoints)]
             ];
         } else {
-            //TODO: handle the case when c is zero (plane is parallel to Z-axis)
             z_arb = [];
         }
 

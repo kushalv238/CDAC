@@ -3,7 +3,7 @@ import React from 'react'
 import Carousel from 'react-bootstrap/Carousel';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { quizImg } from '../../resources'
+import { quizImg, angleBetweenPlanes } from '../../resources'
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX } from '@fortawesome/free-solid-svg-icons';
@@ -23,8 +23,8 @@ const CalculateAngles = (props) => {
             return;
         }
 
-        // allowing an an error of 2deg
-        if (Math.abs(parseFloat(angleInput).toFixed(4) - (angles[0].angle / Math.PI * 180).toFixed(4)) <= 2) {
+        // allowing an an error of 5deg
+        if (Math.abs(parseFloat(angleInput).toFixed(4) - (angles[0].angle / Math.PI * 180).toFixed(4)) <= 5) {
             toast.success("Correct!")
         } else {
             toast.error("Wrong")
@@ -47,7 +47,7 @@ const CalculateAngles = (props) => {
                     <img src={quizImg} alt="Quiz time" className='carouselImg' />
                     <Carousel.Caption>
                         <form onSubmit={checkAngle} className='check-angle-form'>
-                            <label htmlFor="angle">Enter angle between Planes 1 and 2: </label>
+                            <p><label htmlFor="angle">Enter angle between Planes 1 and 2: </label></p>
                             <input type="number" value={angleInput} onChange={e => setAngleInput(e.target.value)} name="angle" id="" />
                             <button type="submit">Submit</button>
                         </form>
@@ -70,19 +70,24 @@ const CalculateAngles = (props) => {
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
-                    <div className='angle-calc-explained bg-light'>
-                        <div>
-                            <p>The angle 𝜃 between two planes, 𝑛<sub>1</sub> & 𝑛<sub>2</sub>, can then be calculated as:</p>
-                            <p className='angle-equation'><span>𝜃</span><span>&nbsp;=&nbsp;</span><span>cos<sup>-1</sup></span><span className='brac-font'>(</span><span className='division'><span className='text-center'>𝑛<sub>1</sub>⋅𝑛<sub>2</sub></span><span className='text-center'>||𝑛<sub>1</sub>||&nbsp;||𝑛<sub>2</sub>||</span></span><span className='brac-font'>)</span> </p>
-                            <p>
-                                <p>Where:</p>
-                                <ul>
-                                    <li>𝑛<sub>1</sub>⋅𝑛<sub>2</sub> is the dot product of the two normal vectors.</li>
-                                    <li><span className='text-center'>||𝑛<sub>1</sub>|| and ||𝑛<sub>2</sub>||</span> are the magnitudes of the normal vectors 𝑛<sub>1</sub> & 𝑛<sub>2</sub></li>
-                                </ul>
-                            </p>
+                    {/* <Carousel.Caption> */}
+                        <div className='angle-calc-explained bg-light'>
+                            <div>
+                                <p>The angle 𝜃 between two planes, 𝑛<sub>1</sub> & 𝑛<sub>2</sub>, can then be calculated as:</p>
+                                <p className='angle-equation'><span>𝜃</span><span>&nbsp;=&nbsp;</span><span>cos<sup>-1</sup></span><span className='brac-font'>(</span><span className='division'><span className='text-center'>𝑛<sub>1</sub>⋅𝑛<sub>2</sub></span><span className='text-center'>||𝑛<sub>1</sub>||&nbsp;||𝑛<sub>2</sub>||</span></span><span className='brac-font'>)</span> </p>
+                                <p>
+                                    <p>Where:</p>
+                                    <ul>
+                                        <li>𝑛<sub>1</sub>⋅𝑛<sub>2</sub> is the dot product of the two normal vectors.</li>
+                                        <li><span className='text-center'>||𝑛<sub>1</sub>|| and ||𝑛<sub>2</sub>||</span> are the magnitudes of the normal vectors 𝑛<sub>1</sub> & 𝑛<sub>2</sub></li>
+                                    </ul>
+                                </p>
+                            </div>
+                            <div>
+                                <img src={angleBetweenPlanes} alt="Angle Between Planes" className='carouselImg angle-img' />
+                            </div>
                         </div>
-                    </div>
+                    {/* </Carousel.Caption> */}
                 </Carousel.Item>
             </Carousel>
 

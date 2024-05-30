@@ -34,12 +34,6 @@ const SidePanel = ({ planes, setPlanes, panelVisible, setPanelVisible, panelRef,
 		setPlanes(updatedPlanes);
 	};
 
-	//TODO: Remove this on deployment
-	//For debuggin purpose only
-	// useEffect(() => {
-	// 	console.log(planes)
-	// }, [planes])
-
 	return (
 		<div id="side-panel" className={`${!panelVisible ? 'side-panel-small' : ''}`} ref={panelRef}>
 			{
@@ -113,6 +107,7 @@ const SidePanel = ({ planes, setPlanes, panelVisible, setPanelVisible, panelRef,
 					ref={anglesPopUpBttnRef}
 					onClick={() => setCalcAnglesPopUpActive(true)}
 					id='test-angle-bttn'
+					className={!angleAvailable ? 'bttn-grey cursor-not-allowed' : ''}
 					title='Calculate Angles'
 				>Calculate Angles</button>
 			</div>

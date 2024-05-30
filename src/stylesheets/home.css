@@ -70,10 +70,19 @@
     filter: invert(100%);
 }
 
+.carousel-caption {
+    width: 100%;
+    left: 0 !important;
+}
+
+.angle-calc-explained,
 .check-angle-form {
     color: black;
-    font-size: 1.4rem;
     font-weight: 500;
+}
+
+.check-angle-form {
+    font-size: 1.4rem;
 }
 
 .check-angle-form button {
@@ -84,6 +93,10 @@
     margin: 0 4px;
 
     border-radius: 4px;
+}
+
+.angle-img {
+    width: 50%;
 }
 
 .box {
@@ -116,6 +129,16 @@
     flex-wrap: wrap;
 
     padding: 0 5rem;
+}
+
+.angle-calc-explained > div {
+    width: 100%;
+}
+
+.angle-calc-explained > div:nth-child(2) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .angle-calc-explained > div > p:nth-child(1) {
