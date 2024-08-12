@@ -41,8 +41,10 @@ const Graph = props => {
                         }
                     ],
                     aspectratio: { x: 1, y: 1, z: 1 },
+                    // Change these values, ie make em dynamic
                     camera: {
-                        eye: { x: 1.5, y: -0.9, z: 0.7 },
+                        eye: { x: 0, y: 0, z: 2 },
+                        up: { x: 0, y: 0.667, z: -0.667 },
                     },
                 },
                 autosize: true,

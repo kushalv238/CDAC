@@ -128,6 +128,32 @@ function createData(planes) {
         )
     })
 
+    function crossProduct(v1, v2) {
+        return [
+            v1[1] * v2[2] - v1[2] * v2[1],
+            v1[2] * v1[0] - v1[0] * v2[2],
+            v1[0] * v2[1] - v1[1] * v2[0] 
+        ];
+    }
+    
+    function getPlaneFromNormals(normal1, normal2) {
+        const planeNormal = crossProduct(normal1, normal2);
+    
+        const pointOnPlane = [0, 0, 0]; 
+        const [a, b, c] = planeNormal;
+
+        const d = -(a * pointOnPlane[0] + b * pointOnPlane[1] + c * pointOnPlane[2]);
+    
+        return { a, b, c, d };
+    }
+    
+    // Put plane 1 and plane 2 normals here (sidePoint ig):
+    const normal1 = [1, 1, 1];
+    const normal2 = [1, 0.3333, 0.3333];
+    
+    const planeEquation = getPlaneFromNormals(normal1, normal2);
+    console.log(`The plane by the two normals is: ${planeEquation.a}x + ${planeEquation.b}y + ${planeEquation.c}z = -${planeEquation.d}`);
+
     return { data, angles };
 }
 
